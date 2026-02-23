@@ -390,8 +390,25 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserve
+
+  function checkReveals() {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+      if (el.getBoundingClientRect().top < window.innerHeight - 40) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+    checkReveals();
+  });
+
+  window.addEventListener('load', checkReveals);
+  document.addEventListener('DOMContentLoaded', checkReveals);
+  setTimeout(checkReveals, 300);
+</script>
+</body>
+</html>
