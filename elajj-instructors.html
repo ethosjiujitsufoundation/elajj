@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructors | East LA Jiu Jitsu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0f0e0c; --white: #ffffff; --off-white: #faf8f5; --light: #f2ede6;
+    --gold: #d4920a; --gold-light: #e8a820; --gold-dim: rgba(212,146,10,0.1);
+    --ink: #1a1714; --mid: #6b6158; --border: #e8e2d9;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em; color: var(--ink); text-decoration: none; line-height: 1; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--mid); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.3rem; border-radius: 1px; }
+  .nav-cta:hover { background: var(--gold-light) !important; }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: var(--ink); padding: 10rem 3rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .page-header::after {
+    content: 'COACHES'; position: absolute; bottom: -2rem; right: -1rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 14vw, 16rem);
+    color: rgba(212,146,10,0.06); line-height: 1; pointer-events: none;
+  }
+  .page-header-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem;
+  }
+  .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--gold); }
+  .page-header h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 7rem);
+    line-height: 0.92; color: var(--white); letter-spacing: 0.01em;
+  }
+  .page-header h1 em { font-style: normal; color: var(--gold); }
+  .page-header p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.8; margin-top: 1.5rem; }
+
+  /* INSTRUCTOR GRID */
+  .instructors { background: var(--white); padding: 7rem 3rem; }
+  .instructors-inner { max-width: 1100px; margin: 0 auto; }
+  .instructors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+
+  .instructor-card { background: var(--light); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s, border-color 0.2s; }
+  .instructor-card:hover { transform: translateY(-4px); border-color: rgba(212,146,10,0.4); }
+  .instructor-photo {
+    width: 100%; aspect-ratio: 3/4; background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.5rem; position: relative; overflow: hidden;
+  }
+  .instructor-photo-placeholder {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(212,146,10,0.15); border: 2px dashed rgba(212,146,10,0.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .instructor-photo-placeholder svg { width: 32px; height: 32px; opacity: 0.3; }
+  .instructor-photo span { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,23,20,0.3); }
+  .instructor-info { padding: 1.75rem; }
+  .instructor-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 0.25rem; }
+  .instructor-title { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .instructor-belt {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .belt-pip { width: 12px; height: 12px; border-radius: 50%; background: var(--border); border: 1px solid rgba(26,23,20,0.15); }
+  .belt-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+  .instructor-bio { font-size: 0.85rem; font-weight: 300; color: var(--mid); line-height: 1.7; }
+  .instructor-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+  .instructor-tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 1px; }
+
+  /* ADD INSTRUCTOR CTA */
+  .instructor-card.add-card {
+    background: transparent; border: 1px dashed rgba(212,146,10,0.3);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 400px; cursor: pointer;
+  }
+  .add-card-inner { text-align: center; padding: 2rem; }
+  .add-card-inner p { font-size: 0.8rem; font-weight: 300; color: rgba(26,23,20,0.35); margin-top: 0.75rem; line-height: 1.6; }
+
+  /* SECTION DIVIDER */
+  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.1; color: var(--ink); }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* TRIAL BAND */
+  .trial-band { background: var(--gold); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .trial-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: 0.04em; color: var(--white); line-height: 1; }
+  .trial-band p { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.75); margin-top: 0.3rem; }
+  .btn-trial { background: var(--white); color: var(--gold); padding: 1rem 2.4rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; white-space: nowrap; display: inline-block; transition: background 0.2s, transform 0.15s; }
+  .btn-trial:hover { background: var(--off-white); transform: translateY(-2px); }
+
+  /* FOUNDATION BAND */
+  .foundation-band { background: var(--ink); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .foundation-band p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 600px; }
+  .foundation-band p strong { color: rgba(255,255,255,0.75); }
+  .foundation-band a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(212,146,10,0.3); padding-bottom: 0.1rem; white-space: nowrap; }
+  .foundation-band a:hover { border-color: var(--gold); }
+
+  footer { background: var(--ink); padding: 4rem 3rem 2.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .f-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em; color: var(--white); text-decoration: none; display: block; margin-bottom: 1rem; }
+  .f-logo span { color: var(--gold); }
+  .footer-brand p { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.3); line-height: 1.7; }
+  .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.65rem; }
+  .footer-col a { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.72rem; color: rgba(255,255,255,0.2); flex-wrap: wrap; gap: 0.75rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header { padding: 8rem 1.5rem 4rem; }
+    .instructors { padding: 5rem 1.5rem; }
+    .instructors-grid { grid-template-columns: 1fr 1fr; }
+    .trial-band, .foundation-band { padding: 2rem 1.5rem; }
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .instructors-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="elajj.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
+  <ul class="nav-links">
+    <li><a href="elajj.html#programs">Programs</a></li>
+    <li><a href="elajj.html#schedule">Schedule</a></li>
+    <li><a href="elajj-instructors.html" class="active">Instructors</a></li>
+    <li><a href="elajj-programs.html">Special Programs</a></li>
+    <li><a href="elajj.html#location">Location</a></li>
+    <li><a href="elajj.html#trial" class="nav-cta">Free Trial</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="section-label">Our Team</p>
+    <h1>THE COACHES<br>BEHIND <em>ELAJJ.</em></h1>
+    <p>Every instructor at East LA Jiu Jitsu is more than a coach — they're mentors, neighbors, and practitioners who believe jiu-jitsu changes lives. Meet the people who show up every day.</p>
+  </div>
+</div>
+
+<section class="instructors">
+  <div class="instructors-inner">
+    <p class="section-label">Instructors</p>
+    <h2 class="section-title">Meet the <em>team.</em></h2>
+
+    <div class="instructors-grid">
+
+      <!-- Placeholder card 1 -->
+      <div class="instructor-card">
+        <div class="instructor-photo">
+          <div class="instructor-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span>Photo coming soon</span>
+        </div>
+        <div class="instructor-info">
+          <p class="instructor-title">Head Instructor</p>
+          <h3 class="instructor-name">Instructor Name</h3>
+          <div class="instructor-belt">
+            <span class="belt-pip" style="background:#4a3728;"></span>
+            <span class="belt-label">Belt · X Stripes</span>
+          </div>
+          <p class="instructor-bio">Bio coming soon. This instructor brings years of experience and a deep commitment to the East LA community. Their teaching style emphasizes fundamentals, discipline, and personal growth.</p>
+          <div class="instructor-tags">
+            <span class="instructor-tag">Youth</span>
+            <span class="instructor-tag">Adult</span>
+            <span class="instructor-tag">Competition</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder card 2 -->
+      <div class="instructor-card">
+        <div class="instructor-photo">
+          <div class="instructor-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span>Photo coming soon</span>
+        </div>
+        <div class="instructor-info">
+          <p class="instructor-title">Youth Instructor</p>
+          <h3 class="instructor-name">Instructor Name</h3>
+          <div class="instructor-belt">
+            <span class="belt-pip" style="background:#4a3728;"></span>
+            <span class="belt-label">Belt · X Stripes</span>
+          </div>
+          <p class="instructor-bio">Bio coming soon. Specializing in youth development, this instructor creates a safe, encouraging environment where kids can build confidence and discipline through jiu-jitsu.</p>
+          <div class="instructor-tags">
+            <span class="instructor-tag">Little Champions</span>
+            <span class="instructor-tag">Youth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder card 3 -->
+      <div class="instructor-card">
+        <div class="instructor-photo">
+          <div class="instructor-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <span>Photo coming soon</span>
+        </div>
+        <div class="instructor-info">
+          <p class="instructor-title">Adult Instructor</p>
+          <h3 class="instructor-name">Instructor Name</h3>
+          <div class="instructor-belt">
+            <span class="belt-pip" style="background:#4a3728;"></span>
+            <span class="belt-label">Belt · X Stripes</span>
+          </div>
+          <p class="instructor-bio">Bio coming soon. This instructor works with adult students at all levels — from first-timers to experienced competitors — with a focus on technique, consistency, and growth.</p>
+          <div class="instructor-tags">
+            <span class="instructor-tag">Adult Fundamentals</span>
+            <span class="instructor-tag">Advanced</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add instructor placeholder -->
+      <div class="instructor-card add-card">
+        <div class="add-card-inner">
+          <p style="font-size:2rem;color:rgba(212,146,10,0.3);">+</p>
+          <p>More instructors<br>coming soon</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="trial-band">
+  <div><h2>Train with our team. First class free.</h2><p>Come in and meet the coaches in person. No commitment required.</p></div>
+  <a href="elajj.html#trial" class="btn-trial">Book Your Free Trial</a>
+</div>
+
+<div class="foundation-band">
+  <p>East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong>, a 501(c)(3) nonprofit organization. Scholarships available — no student turned away for cost.</p>
+  <a href="ethos-jj-foundation.html">Learn About the Foundation →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="elajj.html" class="f-logo">EAST LA <span>JIU JITSU</span></a>
+      <p>World-class jiu-jitsu in East Los Angeles. A program of the Ethos Jiu Jitsu Foundation.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="elajj.html#programs">Programs</a></li>
+        <li><a href="elajj.html#schedule">Schedule</a></li>
+        <li><a href="elajj-instructors.html">Instructors</a></li>
+        <li><a href="elajj-programs.html">Special Programs</a></li>
+        <li><a href="elajj.html#trial">Free Trial Class</a></li>
+        <li><a href="elajj.html#location">Location</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Also</h4>
+      <ul>
+        <li><a href="bhjj.html">Boyle Heights JJ</a></li>
+        <li><a href="ethos-jj-foundation.html">Ethos JJ Foundation</a></li>
+        <li><a href="https://givebutter.com/elajj" target="_blank">Donate / Scholarships</a></li>
+        <li><a href="https://eastlajiujitsu.square.site" target="_blank">Store</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 East LA Jiu Jitsu · A program of the Ethos Jiu Jitsu Foundation</span>
+    <span>3660 1st Street, Los Angeles, CA 90063 · (833) 725-3615</span>
+  </div>
+</footer>
+
+</body>
+</html>
