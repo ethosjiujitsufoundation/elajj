@@ -177,6 +177,9 @@
 </div>
 
 <div class="main">
+<form name="elajj-trial-registration" method="POST" netlify netlify-honeypot="bot-field" data-netlify="true" action="thank-you.html">
+<input type="hidden" name="form-name" value="elajj-trial-registration">
+<input type="hidden" name="bot-field" style="display:none">
 
   <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
 
@@ -232,8 +235,8 @@
         <label>Program of Interest *</label>
         <select>
           <option value="">Select a program</option>
-          <option>Little Champions (Ages 4–7)</option>
-          <option>Youth Program (Ages 8–17)</option>
+          <option>Pee-Wees (Ages 5–7)</option>
+          <option>Kids (Ages 8–12)</option>
           <option>Adult Fundamentals (18+)</option>
           <option>Adult Advanced (18+)</option>
           <option>Not sure yet</option>
@@ -381,11 +384,12 @@
 
   <!-- SUBMIT -->
   <div class="submit-area">
-    <button class="btn-submit" type="button" onclick="handleSubmit()">Submit Registration</button>
-    <p class="submit-note">You will receive a confirmation by email. Please bring a printed or digital copy of this waiver to your first class.<br>Questions? Call us at <strong>(833) 725-3615</strong> or email <strong>info@elajj.com</strong></p>
+    <button class="btn-submit" type="submit">Submit Registration</button>
+    <p class="submit-note">Your registration will be sent to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="761f18101936131a171c1c5815191b">[email&#160;protected]</a>. You'll receive a confirmation shortly. Please bring a printed or digital copy of this waiver to your first class.<br>Questions? Call us at <strong>(833) 725-3615</strong> or email <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="acc5c2cac3ecc9c0cdc6c682cfc3c1">[email&#160;protected]</a></strong></p>
   </div>
 
 </div>
+</form>
 
 <div class="foundation-band">
   <p>East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong>, a 501(c)(3) nonprofit. Scholarships available — no student turned away for cost.</p>
@@ -399,36 +403,24 @@
   </div>
 </footer>
 
-<script>
-  // Hamburger
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-  });
-  document.getElementById('mobileClose').addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }));
-
-  // Submit handler
-  function handleSubmit() {
-    const waiverChecked = document.getElementById('waiver-agree').checked;
-    const rulesChecked = document.getElementById('rules-agree').checked;
-    if (!waiverChecked || !rulesChecked) {
-      alert('Please read and agree to the waiver and gym rules before submitting.');
-      return;
-    }
-    alert('Thank you! Your trial class registration has been received. We\'ll be in touch shortly to confirm your first class. See you on the mat!');
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.getElementById('mobileClose').addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 </script>
 </body>
 </html>
