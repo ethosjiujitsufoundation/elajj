@@ -217,6 +217,54 @@
     .trial-banner, .foundation-band { padding:2rem 1.5rem; }
     footer { padding:3rem 1.5rem 2rem; }
   }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink); border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  nav:not(.scrolled) .hamburger span { background: var(--white); }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--white); z-index: 150;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 0.08em;
+    color: var(--ink); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .mobile-cta {
+    background: var(--gold); color: var(--white) !important;
+    padding: 0.9rem 2.5rem; font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+  .mobile-menu .mobile-close {
+    position: absolute; top: 1.4rem; right: 1.5rem;
+    font-size: 1.8rem; color: var(--mid); cursor: pointer;
+    background: none; border: none; line-height: 1;
+  }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+  }
 </style>
 </head>
 <body>
@@ -231,7 +279,19 @@
     <li><a href="#location">Location</a></li>
     <li><a href="#trial" class="nav-cta">Free Trial</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+    <a href="#programs">Programs</a>
+    <a href="#schedule">Schedule</a>
+    <a href="elajj-instructors.html">Instructors</a>
+    <a href="elajj-programs.html">Special Programs</a>
+    <a href="#location">Location</a>
+    <a href="#trial">Free Trial</a>
+</div>
+
 
 <section class="hero">
   <div class="hero-left">
@@ -338,7 +398,7 @@
       <h2 class="section-title">Right in the heart of <em>East LA.</em></h2>
       <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Address</strong><p>3660 1st Street<br>Los Angeles, CA 90063</p></div></div>
       <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Phone</strong><p>(833) 725-3615</p></div></div>
-      <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Email</strong><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5831363e37183d34393232763b3735">info@elajj.com</a></p></div></div>
+      <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Email</strong><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5831363e37183d34393232763b3735">[email&#160;protected]</a></p></div></div>
       <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Instagram</strong><p>@east_la_jiujitsu</p></div></div>
       <a href="#trial" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">Book Free Trial</a>
     </div>
@@ -354,7 +414,7 @@
 
 <div class="foundation-band">
   <p>East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong>, a 501(c)(3) nonprofit organization. Scholarships available — no student turned away for cost.</p>
-  <a href="https://ethosjjfoundation.com" target="_blank">Learn About the Foundation →</a>
+  <a href="https://ethosjjfoundation.org" target="_blank">Learn About the Foundation →</a>
 </div>
 
 <footer>
@@ -409,6 +469,27 @@
   window.addEventListener('load', checkReveals);
   document.addEventListener('DOMContentLoaded', checkReveals);
   setTimeout(checkReveals, 300);
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.getElementById('mobileClose').addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
 </script>
 </body>
 </html>

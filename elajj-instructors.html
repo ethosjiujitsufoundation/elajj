@@ -139,21 +139,81 @@
   @media (max-width: 600px) {
     .instructors-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── HAMBURGER ── */
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; cursor: pointer;
+    background: none; border: none; padding: 4px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink); border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  nav:not(.scrolled) .hamburger span { background: var(--white); }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--white); z-index: 150;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 0.08em;
+    color: var(--ink); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .mobile-cta {
+    background: var(--gold); color: var(--white) !important;
+    padding: 0.9rem 2.5rem; font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+  .mobile-menu .mobile-close {
+    position: absolute; top: 1.4rem; right: 1.5rem;
+    font-size: 1.8rem; color: var(--mid); cursor: pointer;
+    background: none; border: none; line-height: 1;
+  }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
+  <a href="elajj.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
   <ul class="nav-links">
-    <li><a href="index.html#programs">Programs</a></li>
-    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="elajj.html#programs">Programs</a></li>
+    <li><a href="elajj.html#schedule">Schedule</a></li>
     <li><a href="elajj-instructors.html" class="active">Instructors</a></li>
     <li><a href="elajj-programs.html">Special Programs</a></li>
-    <li><a href="index.html#location">Location</a></li>
-    <li><a href="index.html#trial" class="nav-cta">Free Trial</a></li>
+    <li><a href="elajj.html#location">Location</a></li>
+    <li><a href="elajj.html#trial" class="nav-cta">Free Trial</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+    <a href="elajj.html#programs">Programs</a>
+    <a href="elajj.html#schedule">Schedule</a>
+    <a href="elajj-instructors.html">Instructors</a>
+    <a href="elajj-programs.html">Special Programs</a>
+    <a href="elajj.html#location">Location</a>
+    <a href="elajj.html#trial">Free Trial</a>
+</div>
+
 
 <div class="page-header">
   <div class="page-header-inner">
@@ -254,7 +314,7 @@
 
 <div class="trial-band">
   <div><h2>Train with our team. First class free.</h2><p>Come in and meet the coaches in person. No commitment required.</p></div>
-  <a href="index.html#trial" class="btn-trial">Book Your Free Trial</a>
+  <a href="elajj.html#trial" class="btn-trial">Book Your Free Trial</a>
 </div>
 
 <div class="foundation-band">
@@ -265,18 +325,18 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="index.html" class="f-logo">EAST LA <span>JIU JITSU</span></a>
+      <a href="elajj.html" class="f-logo">EAST LA <span>JIU JITSU</span></a>
       <p>World-class jiu-jitsu in East Los Angeles. A program of the Ethos Jiu Jitsu Foundation.</p>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="index.html#programs">Programs</a></li>
-        <li><a href="index.html#schedule">Schedule</a></li>
+        <li><a href="elajj.html#programs">Programs</a></li>
+        <li><a href="elajj.html#schedule">Schedule</a></li>
         <li><a href="elajj-instructors.html">Instructors</a></li>
         <li><a href="elajj-programs.html">Special Programs</a></li>
-        <li><a href="index.html#trial">Free Trial Class</a></li>
-        <li><a href="index.html#location">Location</a></li>
+        <li><a href="elajj.html#trial">Free Trial Class</a></li>
+        <li><a href="elajj.html#location">Location</a></li>
       </ul>
     </div>
     <div class="footer-col">
