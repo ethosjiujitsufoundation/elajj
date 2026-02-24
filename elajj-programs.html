@@ -63,7 +63,7 @@
 
   .btn-primary { background: var(--gold); color: var(--white); padding: 1rem 2.2rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; display: inline-block; transition: background 0.2s, transform 0.15s; }
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-ghost-dark { background: transparent; color: var(--ink); padding: 1rem 2.2rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(26,23,20,0.2); border-radius: 1px; display: inline-block; transition: border-color 0.2s, color 0.2s; margin-left: 0.75rem; }
+  .btn-ghost-dark { margin-left: 0; background: transparent; color: var(--ink); padding: 1rem 2.2rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(26,23,20,0.2); border-radius: 1px; display: inline-block; transition: border-color 0.2s, color 0.2s; margin-left: 0.75rem; }
   .btn-ghost-dark:hover { border-color: var(--gold); color: var(--gold); }
 
   /* Feature image placeholder */
@@ -176,6 +176,10 @@
   @media (max-width: 900px) {
     .hamburger { display: flex; }
   }
+
+  /* Button group — fixes alignment */
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; align-items: center; }
+  .btn-ghost-dark { margin-left: 0; }
 </style>
 </head>
 <body>
@@ -234,7 +238,7 @@
         <li><strong>Contact</strong><span>(833) 725-3615 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e881868e87a88d84898282c68b8785">[email&#160;protected]</a></span></li>
       </ul>
 
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <div class="btn-group">
         <a href="/cdn-cgi/l/email-protection#2841464e47684d44494242064b4745" class="btn-primary">Get in Touch</a>
         <a href="https://www.elarc.org" target="_blank" class="btn-ghost-dark">East LA Regional Center →</a>
       </div>
@@ -264,7 +268,7 @@
         <li><strong>Availability</strong><span>Year-round, no waitlist</span></li>
       </ul>
 
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+      <div class="btn-group">
         <a href="elajj.html#trial" class="btn-primary">Start with a Free Class</a>
         <a href="ethos-jj-foundation.html" class="btn-ghost-dark">Support the Foundation →</a>
       </div>
@@ -279,6 +283,43 @@
 </section>
 
 <!-- CONTACT -->
+
+<!-- CHARTER SCHOOL PROGRAM -->
+<section class="program-feature">
+  <div class="program-feature-inner">
+    <div>
+      <p class="section-label">Charter School Vendor</p>
+      <h2 class="section-title">Charter School <em>Program.</em></h2>
+      <p class="program-desc">East LA Jiu Jitsu is an approved vendor for several charter schools in the Los Angeles area. If your child attends a participating charter school, their education funds can be used to pay for jiu-jitsu classes — making world-class training accessible at no out-of-pocket cost to your family.</p>
+      <p class="program-desc">We offer both group classes and private or small-group sessions, so families can choose the format that works best for their student.</p>
+
+      <div class="eligibility-box">
+        <h4>Approved Charter Schools</h4>
+        <p>We are currently approved vendors for <strong style="color:var(--ink);">Peak Prep Pleasant Valley</strong>, <strong style="color:var(--ink);">iLead Exploration</strong>, <strong style="color:var(--ink);">Sage Oak Charter Schools</strong>, and <strong style="color:var(--ink);">Elite Academic Academy</strong>. If your school isn't listed, contact us — we're open to expanding our vendor approvals.</p>
+      </div>
+
+      <ul class="program-details">
+        <li><strong>Group Classes</strong><span>Up to 5 sessions per week, 1 hour each · $179/month</span></li>
+        <li><strong>Private / Small Group</strong><span>Personalized instruction tailored to the student · Starting at $200/session</span></li>
+        <li><strong>Free Trial</strong><span>First class free for all new students</span></li>
+        <li><strong>Location</strong><span>3660 1st Street, Los Angeles, CA 90063</span></li>
+        <li><strong>Contact</strong><span>(833) 725-3615 · info@elajj.com</span></li>
+      </ul>
+
+      <div class="btn-group">
+        <a href="elajj.html#trial" class="btn-primary">Book a Free Trial</a>
+        <a href="mailto:info@elajj.com" class="btn-ghost-dark">Contact Us</a>
+      </div>
+    </div>
+    <div>
+      <div class="program-image">
+        <p>PROGRAM PHOTO</p>
+        <span>Coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact-band">
   <div class="contact-band-inner">
     <div>
