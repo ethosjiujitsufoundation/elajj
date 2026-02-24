@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Trial Class Registration & Waiver | East LA Jiu Jitsu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff; --off-white: #faf8f5; --light: #f2ede6;
+    --gold: #d4920a; --gold-light: #e8a820; --gold-dim: rgba(212,146,10,0.1);
+    --ink: #1a1714; --mid: #6b6158; --border: #e8e2d9;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--ink); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em; color: var(--ink); text-decoration: none; line-height: 1; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--mid); text-decoration: none; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.3rem; border-radius: 1px; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 200; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--white); z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.08em; color: var(--ink); text-decoration: none; }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close { position: absolute; top: 1.4rem; right: 1.5rem; font-size: 1.8rem; color: var(--mid); cursor: pointer; background: none; border: none; line-height: 1; }
+
+  /* PAGE HEADER */
+  .page-header { background: var(--ink); padding: 9rem 3rem 4rem; position: relative; overflow: hidden; }
+  .page-header::after { content: 'WAIVER'; position: absolute; bottom: -2rem; right: -1rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem,12vw,14rem); color: rgba(212,146,10,0.06); line-height: 1; pointer-events: none; }
+  .page-header-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+  .section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+  .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--gold); }
+  .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 5.5rem); line-height: 0.92; color: var(--white); letter-spacing: 0.01em; }
+  .page-header h1 em { font-style: normal; color: var(--gold); }
+  .page-header p { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.8; margin-top: 1.2rem; }
+
+  /* MAIN CONTENT */
+  .main { max-width: 800px; margin: 0 auto; padding: 4rem 3rem 6rem; }
+
+  /* WHAT YOU GET */
+  .benefits { background: var(--white); border: 1px solid var(--border); padding: 2rem 2.5rem; margin-bottom: 3rem; }
+  .benefits h2 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 1.2rem; }
+  .benefits ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .benefits li { display: flex; gap: 1rem; align-items: flex-start; font-size: 0.9rem; font-weight: 300; color: var(--mid); line-height: 1.6; }
+  .benefits li::before { content: '✓'; color: var(--gold); font-weight: 500; min-width: 1rem; }
+  .eligibility-note { font-size: 0.8rem; font-weight: 300; color: var(--mid); font-style: italic; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+
+  /* FORM */
+  .form-card { background: var(--white); border: 1px solid var(--border); padding: 2.5rem; margin-bottom: 2rem; }
+  .form-card h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 0.4rem; }
+  .form-subtitle { font-size: 0.8rem; font-weight: 300; color: var(--mid); margin-bottom: 2rem; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+  .form-group input, .form-group select, .form-group textarea {
+    border: 1px solid var(--border); background: var(--off-white);
+    padding: 0.75rem 1rem; font-size: 0.9rem; font-weight: 300;
+    font-family: 'DM Sans', sans-serif; color: var(--ink);
+    border-radius: 1px; outline: none; width: 100%;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); background: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6158' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+  .form-divider { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 2rem 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+  /* WAIVER */
+  .waiver-card { background: var(--white); border: 1px solid var(--border); padding: 2.5rem; margin-bottom: 2rem; }
+  .waiver-card h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 0.4rem; }
+  .waiver-body { max-height: 320px; overflow-y: auto; border: 1px solid var(--border); padding: 1.5rem; margin: 1.5rem 0; background: var(--off-white); }
+  .waiver-body p { font-size: 0.82rem; font-weight: 300; color: var(--mid); line-height: 1.75; margin-bottom: 1rem; }
+  .waiver-body p:last-child { margin-bottom: 0; }
+  .waiver-body strong { color: var(--ink); font-weight: 500; }
+  .waiver-body h4 { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin: 1.25rem 0 0.5rem; }
+
+  .checkbox-group { display: flex; align-items: flex-start; gap: 0.9rem; margin: 1.25rem 0; }
+  .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: var(--gold); cursor: pointer; }
+  .checkbox-group label { font-size: 0.85rem; font-weight: 300; color: var(--mid); line-height: 1.6; cursor: pointer; }
+  .checkbox-group label strong { color: var(--ink); }
+
+  /* SIGNATURE */
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+  .sig-box { border: 1px solid var(--border); background: var(--off-white); height: 80px; display: flex; align-items: flex-end; padding: 0.5rem 0.75rem; position: relative; }
+  .sig-box span { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(107,97,88,0.5); }
+  .sig-box::after { content: ''; position: absolute; bottom: 0.75rem; left: 0.75rem; right: 0.75rem; height: 1px; background: var(--border); }
+
+  /* SUBMIT */
+  .submit-area { text-align: center; padding: 1rem 0; }
+  .btn-submit { background: var(--gold); color: var(--white); padding: 1.1rem 3rem; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border: none; cursor: pointer; border-radius: 1px; transition: background 0.2s, transform 0.15s; font-family: 'DM Sans', sans-serif; }
+  .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .submit-note { font-size: 0.75rem; font-weight: 300; color: var(--mid); margin-top: 1rem; line-height: 1.6; }
+
+  /* PRINT */
+  .print-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; margin-bottom: 2rem; transition: border-color 0.2s, color 0.2s; font-family: 'DM Sans', sans-serif; }
+  .print-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* FOUNDATION BAND & FOOTER */
+  .foundation-band { background: var(--ink); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .foundation-band p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 600px; }
+  .foundation-band p strong { color: rgba(255,255,255,0.75); }
+  .foundation-band a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(212,146,10,0.3); padding-bottom: 0.1rem; white-space: nowrap; }
+  footer { background: var(--ink); padding: 3rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: rgba(255,255,255,0.2); flex-wrap: wrap; gap: 0.75rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .page-header { padding: 7rem 1.5rem 3rem; }
+    .main { padding: 2.5rem 1.5rem 4rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .foundation-band, footer { padding: 2rem 1.5rem; }
+  }
+
+  @media print {
+    nav, .print-btn, .foundation-band, footer { display: none; }
+    body { background: white; }
+    .page-header { padding: 2rem; }
+    .main { padding: 1.5rem; }
+    .waiver-body { max-height: none; overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="elajj.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
+  <ul class="nav-links">
+    <li><a href="elajj.html#programs">Programs</a></li>
+    <li><a href="elajj.html#schedule">Schedule</a></li>
+    <li><a href="elajj-instructors.html">Instructors</a></li>
+    <li><a href="elajj-programs.html">Special Programs</a></li>
+    <li><a href="elajj.html#location">Location</a></li>
+    <li><a href="elajj-trial.html" class="nav-cta">Free Trial</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="elajj.html#programs">Programs</a>
+  <a href="elajj.html#schedule">Schedule</a>
+  <a href="elajj-instructors.html">Instructors</a>
+  <a href="elajj-programs.html">Special Programs</a>
+  <a href="elajj.html#location">Location</a>
+  <a href="elajj-trial.html">Free Trial</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="section-label">3-Day Free Trial</p>
+    <h1>TRIAL CLASS<br>REGISTRATION<br>& <em>WAIVER</em></h1>
+    <p>East LA Jiu Jitsu · 3660 1st Street, Los Angeles, CA 90063 · (833) 725-3615</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <button class="print-btn" onclick="window.print()">⎙ Print / Save as PDF</button>
+
+  <!-- WHAT YOU GET -->
+  <div class="benefits">
+    <h2>Your 3-Day Free Trial</h2>
+    <ul>
+      <li>Three days of training — experience different aspects of our program at no cost</li>
+      <li>All levels welcome — complete beginners through experienced practitioners</li>
+      <li>Meet our instructors and training community in person</li>
+      <li>No gear required for your first visit — come in comfortable athletic clothes</li>
+      <li>Exclusively available to local residents who are new to our school</li>
+    </ul>
+    <p class="eligibility-note">* This trial is available to new students only. One trial per person. East LA Jiu Jitsu reserves the right to decline trial enrollment at its discretion.</p>
+  </div>
+
+  <!-- REGISTRATION FORM -->
+  <div class="form-card">
+    <h2>Student Registration</h2>
+    <p class="form-subtitle">Please complete all fields. For minors, a parent or legal guardian must complete this form.</p>
+
+    <div class="form-divider">Student Information</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>First Name *</label>
+        <input type="text" placeholder="First name">
+      </div>
+      <div class="form-group">
+        <label>Last Name *</label>
+        <input type="text" placeholder="Last name">
+      </div>
+      <div class="form-group">
+        <label>Date of Birth *</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" placeholder="Age" min="3" max="99">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="(000) 000-0000">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="email@example.com">
+      </div>
+      <div class="form-group full">
+        <label>Home Address</label>
+        <input type="text" placeholder="Street address, city, state, zip">
+      </div>
+      <div class="form-group">
+        <label>Program of Interest *</label>
+        <select>
+          <option value="">Select a program</option>
+          <option>Little Champions (Ages 4–7)</option>
+          <option>Youth Program (Ages 8–17)</option>
+          <option>Adult Fundamentals (18+)</option>
+          <option>Adult Advanced (18+)</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Prior Jiu Jitsu Experience</label>
+        <select>
+          <option value="">Select one</option>
+          <option>None — complete beginner</option>
+          <option>Less than 6 months</option>
+          <option>6 months – 2 years</option>
+          <option>2+ years</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>How did you hear about us?</label>
+        <select>
+          <option value="">Select one</option>
+          <option>Instagram / Social Media</option>
+          <option>Friend or Family Referral</option>
+          <option>Google Search</option>
+          <option>Charter School Program</option>
+          <option>East LA Regional Center</option>
+          <option>Flyer / Community Outreach</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Medical Conditions or Injuries (if any)</label>
+        <textarea placeholder="List any conditions, injuries, or physical limitations our instructors should be aware of. Leave blank if none."></textarea>
+      </div>
+    </div>
+
+    <div class="form-divider">Emergency Contact</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Emergency Contact Name *</label>
+        <input type="text" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Relationship to Student *</label>
+        <input type="text" placeholder="e.g. Parent, Spouse, Sibling">
+      </div>
+      <div class="form-group full">
+        <label>Emergency Contact Phone *</label>
+        <input type="tel" placeholder="(000) 000-0000">
+      </div>
+    </div>
+
+    <div class="form-divider">Parent / Guardian (Minors Only)</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Parent / Guardian Name</label>
+        <input type="text" placeholder="Full legal name">
+      </div>
+      <div class="form-group">
+        <label>Relationship to Student</label>
+        <input type="text" placeholder="e.g. Mother, Father, Legal Guardian">
+      </div>
+      <div class="form-group">
+        <label>Parent / Guardian Phone</label>
+        <input type="tel" placeholder="(000) 000-0000">
+      </div>
+      <div class="form-group">
+        <label>Parent / Guardian Email</label>
+        <input type="email" placeholder="email@example.com">
+      </div>
+    </div>
+  </div>
+
+  <!-- LIABILITY WAIVER -->
+  <div class="waiver-card">
+    <h2>Liability Waiver & Release</h2>
+    <p class="form-subtitle" style="margin-bottom:1rem;">Please read carefully before signing.</p>
+
+    <div class="waiver-body">
+      <p><strong>EAST LA JIU JITSU — ASSUMPTION OF RISK, WAIVER OF LIABILITY, AND RELEASE OF CLAIMS</strong></p>
+
+      <p>This Waiver and Release of Liability ("Agreement") is entered into by the undersigned participant, parent, or legal guardian ("Participant") in connection with participation in martial arts training, instruction, and related activities offered by East LA Jiu Jitsu, a program of the Ethos Jiu Jitsu Foundation, located at 3660 1st Street, Los Angeles, CA 90063 ("the Gym").</p>
+
+      <h4>1. Assumption of Risk</h4>
+      <p>Participant acknowledges that Brazilian Jiu Jitsu and related martial arts activities involve physical contact, grappling, and techniques that carry an inherent risk of injury, including but not limited to: sprains, strains, fractures, bruising, dislocations, and other musculoskeletal injuries. Participant voluntarily assumes all risks associated with participation, whether known or unknown, foreseeable or unforeseeable.</p>
+
+      <h4>2. Waiver and Release of Liability</h4>
+      <p>In consideration of being permitted to participate in trial and/or regular classes at East LA Jiu Jitsu, Participant hereby releases, waives, and discharges the Gym, the Ethos Jiu Jitsu Foundation, its officers, directors, employees, volunteers, instructors, and agents (collectively, "Released Parties") from any and all claims, demands, causes of action, or liability arising out of or related to any loss, damage, injury, or death — whether caused by the negligence of the Released Parties or otherwise — while participating in any activity at or associated with East LA Jiu Jitsu.</p>
+
+      <h4>3. Indemnification</h4>
+      <p>Participant agrees to indemnify and hold harmless the Released Parties from any claims, actions, damages, or expenses (including legal fees) arising from Participant's participation in Gym activities, or from the Participant's breach of this Agreement.</p>
+
+      <h4>4. Medical Authorization</h4>
+      <p>In the event that Participant requires emergency medical attention and a parent or guardian is not immediately available, Participant (or parent/guardian of a minor) hereby authorizes the Gym's staff to seek appropriate emergency medical treatment on Participant's behalf. Participant agrees to be responsible for all costs associated with such treatment.</p>
+
+      <h4>5. Photo and Media Release</h4>
+      <p>Participant grants East LA Jiu Jitsu and the Ethos Jiu Jitsu Foundation permission to photograph or record Participant during classes or events, and to use such images or footage for promotional, educational, or social media purposes without compensation. This consent may be withdrawn in writing at any time.</p>
+
+      <h4>6. Rules and Conduct</h4>
+      <p>Participant agrees to follow all Gym rules and instructor directions at all times. East LA Jiu Jitsu reserves the right to remove any participant from the program for conduct deemed unsafe, disrespectful, or otherwise disruptive to the training environment.</p>
+
+      <h4>7. Severability</h4>
+      <p>If any provision of this Agreement is found to be unenforceable, the remaining provisions shall continue in full force and effect.</p>
+
+      <h4>8. Governing Law</h4>
+      <p>This Agreement shall be governed by and construed in accordance with the laws of the State of California. Any disputes arising under this Agreement shall be subject to the exclusive jurisdiction of the courts of Los Angeles County, California.</p>
+
+      <p><strong>BY SIGNING BELOW, PARTICIPANT ACKNOWLEDGES THAT THEY HAVE READ AND UNDERSTOOD THIS AGREEMENT IN ITS ENTIRETY, AND VOLUNTARILY AGREE TO ITS TERMS.</strong></p>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="waiver-agree">
+      <label for="waiver-agree">I have read and understand the Liability Waiver above. I agree to its terms on behalf of myself and/or the minor student named in this registration. <strong>If this registration is for a minor, I confirm that I am the parent or legal guardian.</strong></label>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="photo-agree">
+      <label for="photo-agree">I consent to photography and video recording during classes and events for use in East LA Jiu Jitsu promotional materials.</label>
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="rules-agree">
+      <label for="rules-agree">I agree to follow all Gym rules and instructor directions, and understand that failure to do so may result in removal from the program.</label>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="form-divider" style="margin-top:2rem;">Signature</div>
+    <div class="sig-grid">
+      <div class="form-group">
+        <label>Printed Name of Signer *</label>
+        <input type="text" placeholder="Full legal name">
+      </div>
+      <div class="form-group">
+        <label>Date *</label>
+        <input type="date">
+      </div>
+      <div class="form-group full">
+        <label>Signature *</label>
+        <div class="sig-box"><span>Sign here</span></div>
+      </div>
+      <div class="form-group full">
+        <label>If signing for a minor — printed name of student</label>
+        <input type="text" placeholder="Student's full legal name">
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-area">
+    <button class="btn-submit" type="button" onclick="handleSubmit()">Submit Registration</button>
+    <p class="submit-note">You will receive a confirmation by email. Please bring a printed or digital copy of this waiver to your first class.<br>Questions? Call us at <strong>(833) 725-3615</strong> or email <strong>info@elajj.com</strong></p>
+  </div>
+
+</div>
+
+<div class="foundation-band">
+  <p>East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong>, a 501(c)(3) nonprofit. Scholarships available — no student turned away for cost.</p>
+  <a href="ethos-jj-foundation.html">Learn About the Foundation →</a>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>© 2026 East LA Jiu Jitsu · A program of the Ethos Jiu Jitsu Foundation</span>
+    <span>3660 1st Street, Los Angeles, CA 90063 · (833) 725-3615</span>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.getElementById('mobileClose').addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+
+  // Submit handler
+  function handleSubmit() {
+    const waiverChecked = document.getElementById('waiver-agree').checked;
+    const rulesChecked = document.getElementById('rules-agree').checked;
+    if (!waiverChecked || !rulesChecked) {
+      alert('Please read and agree to the waiver and gym rules before submitting.');
+      return;
+    }
+    alert('Thank you! Your trial class registration has been received. We\'ll be in touch shortly to confirm your first class. See you on the mat!');
+  }
+</script>
+</body>
+</html>
