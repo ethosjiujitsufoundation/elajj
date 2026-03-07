@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>East LA Jiu Jitsu — Support Our Mission</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --maroon: #6B1A2A;
+    --maroon-deep: #3E0D18;
+    --cream: #F9F5EF;
+    --off-white: #FDFCFA;
+    --gold: #C4955A;
+    --gold-light: #D4AD72;
+    --text-dark: #1A1410;
+    --text-mid: #50433C;
+    --slate: #E4DDD4;
+  }
+
+  @page {
+    size: 8.5in 11in;
+    margin: 0;
+  }
+
+  body {
+    width: 8.5in;
+    height: 11in;
+    margin: 0 auto;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+    padding: 0.45in 0.5in 0.7in;
+    background: var(--maroon-deep);
+    overflow: hidden;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-deep) 60%, #2a0810 100%);
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -20%; right: -5%; width: 55%; height: 160%;
+    background: linear-gradient(160deg, transparent 48%, var(--gold) 48%, var(--gold) 49.5%, transparent 49.5%);
+    z-index: 2; opacity: 0.35;
+  }
+
+  .hero-stripe {
+    position: absolute;
+    top: -20%; right: -8%; width: 55%; height: 160%;
+    background: linear-gradient(160deg, transparent 52%, var(--gold) 52%, var(--gold) 52.8%, transparent 52.8%);
+    z-index: 2; opacity: 0.2;
+  }
+
+  .hero-noise {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.04; z-index: 3; mix-blend-mode: overlay;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 30%; left: 25%; width: 60%; height: 60%;
+    background: radial-gradient(ellipse, rgba(196,149,90,0.15) 0%, transparent 70%);
+    z-index: 3;
+  }
+
+  .hero-content {
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+  }
+
+  .logo-img {
+    height: 0.95in;
+    margin-bottom: 0.2in;
+    opacity: 0.95;
+  }
+
+  .hero-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500; font-size: 11px;
+    letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.18in;
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px; line-height: 0.9;
+    color: white; letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.1in;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+
+  .hero-headline em {
+    font-style: normal;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400; font-size: 16px;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 0.12in;
+  }
+
+  .hero-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px; max-width: 5in; line-height: 1.5;
+  }
+
+  .hero-cut {
+    position: absolute; bottom: -1px; left: 0;
+    width: 100%; height: 0.5in; z-index: 15;
+  }
+  .hero-cut svg { width: 100%; height: 100%; display: block; }
+
+  /* ============================================
+     STATS BAR
+     ============================================ */
+  .stats-bar {
+    flex-shrink: 0;
+    margin: -0.28in 0.5in 0;
+    position: relative; z-index: 20;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 8px 40px rgba(26,20,16,0.12), 0 2px 8px rgba(26,20,16,0.06);
+    display: flex; align-items: center; justify-content: center;
+    padding: 0.14in 0.3in;
+    border: 1px solid var(--slate);
+  }
+
+  .stat-item {
+    flex: 1; text-align: center; position: relative;
+  }
+
+  .stat-item + .stat-item::before {
+    content: ''; position: absolute;
+    left: 0; top: 15%; height: 70%; width: 1px;
+    background: var(--slate);
+  }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px; color: var(--maroon);
+    line-height: 1; letter-spacing: 1px;
+  }
+
+  .stat-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400; font-size: 8px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-mid); margin-top: 2px;
+  }
+
+  /* ============================================
+     MIDDLE CONTENT — fills remaining space
+     ============================================ */
+  .middle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0.15in 0.55in;
+  }
+
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500; font-size: 10px;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.06in;
+  }
+
+  .mission-text {
+    font-size: 12.5px; line-height: 1.55;
+    color: var(--text-mid); margin-bottom: 0.04in;
+  }
+
+  .mission-bold {
+    font-weight: 700; color: var(--maroon); font-size: 12.5px;
+  }
+
+  .divider {
+    height: 1px; background: var(--slate); margin: 0.08in 0;
+  }
+
+  .donation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.06in 0.4in;
+    margin: 0.08in 0;
+  }
+
+  .donation-item {
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+
+  .donation-dot {
+    width: 7px; height: 7px; min-width: 7px;
+    border-radius: 50%; background: var(--gold); margin-top: 4px;
+  }
+
+  .donation-item-text {
+    font-size: 11px; color: var(--text-dark); line-height: 1.35;
+  }
+
+  .donation-item-text strong {
+    color: var(--maroon); font-weight: 600;
+  }
+
+  /* ============================================
+     QR BANNER
+     ============================================ */
+  .qr-banner {
+    flex-shrink: 0;
+    background: var(--maroon);
+    padding: 0.1in 0.55in;
+    position: relative; overflow: hidden;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .qr-banner::after {
+    content: ''; position: absolute;
+    top: -50%; right: -2%; width: 30%; height: 250%;
+    background: linear-gradient(160deg, transparent 46%, var(--gold) 46%, var(--gold) 48%, transparent 48%);
+    opacity: 0.2;
+  }
+
+  .qr-banner-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; color: white;
+    letter-spacing: 3px; text-align: center;
+    position: relative; z-index: 2;
+  }
+
+  .qr-banner-text em {
+    font-style: normal; color: var(--gold-light);
+  }
+
+  /* ============================================
+     QR SECTION
+     ============================================ */
+  .qr-section {
+    flex-shrink: 0;
+    display: flex; justify-content: center;
+    gap: 0.4in;
+    padding: 0.22in 0 0.15in;
+  }
+
+  .qr-item { text-align: center; }
+
+  .qr-box {
+    width: 0.95in; height: 0.95in;
+    background: white;
+    border: 2px solid var(--maroon);
+    border-radius: 4px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 8px rgba(107,26,42,0.08);
+  }
+
+  .qr-placeholder { font-size: 8px; color: #aaa; font-weight: 500; }
+  .qr-placeholder-url { font-size: 6px; color: #bbb; margin-top: 2px; }
+
+  .qr-label {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--maroon);
+  }
+
+  .qr-sublabel {
+    font-size: 7.5px; color: var(--text-mid); margin-top: 1px;
+  }
+
+  /* ============================================
+     CLOSING
+     ============================================ */
+  .closing {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 0 0 0.15in;
+  }
+
+  .closing-line {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: 14px;
+    color: var(--maroon); letter-spacing: 1px;
+  }
+
+  .closing-sub {
+    font-size: 9.5px; color: var(--text-mid); margin-top: 2px;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    flex-shrink: 0;
+    background: var(--maroon-deep);
+    padding: 0.1in 0.55in;
+    display: flex; justify-content: space-between; align-items: center;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .footer-left, .footer-right {
+    font-size: 7px; color: rgba(255,255,255,0.5); line-height: 1.5;
+  }
+
+  .footer-right { text-align: right; }
+
+  .footer-center {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500; font-size: 9px;
+    letter-spacing: 3px; color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  /* ============================================
+     EXPORT BUTTON
+     ============================================ */
+  .export-btn {
+    position: fixed; top: 20px; right: 20px; z-index: 9999;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: white; background: var(--maroon);
+    border: none; padding: 12px 28px;
+    border-radius: 4px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(62,13,24,0.35);
+    transition: all 0.2s ease;
+  }
+
+  .export-btn:hover {
+    background: var(--maroon-deep);
+    box-shadow: 0 6px 24px rgba(62,13,24,0.45);
+    transform: translateY(-1px);
+  }
+
+  @media print {
+    .export-btn { display: none !important; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <img src="logo_white.png" alt="East LA Jiu Jitsu" class="logo-img">
+      <div class="hero-label">East Los Angeles &middot; Since 2021</div>
+      <div class="hero-headline">THIS IS<br><em>EAST LA.</em></div>
+      <div class="hero-sub">World-Class Jiu-Jitsu For Our Community</div>
+      <div class="hero-tagline">
+        World-class jiu-jitsu for kids, teens, and adults in the heart of East Los Angeles.
+        No experience needed. No excuses accepted.
+      </div>
+    </div>
+    <div class="hero-cut">
+      <svg viewBox="0 0 816 60" preserveAspectRatio="none">
+        <polygon points="0,60 816,0 816,60" fill="#FDFCFA"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number">800+</div>
+      <div class="stat-label">Students / Year</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">250</div>
+      <div class="stat-label">Scholarships Given</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4+</div>
+      <div class="stat-label">Years Strong</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$0</div>
+      <div class="stat-label">Cost to Students in Need</div>
+    </div>
+  </div>
+
+  <!-- MIDDLE CONTENT — flexes to fill available space -->
+  <div class="middle">
+    <div>
+      <div class="section-label">About The Mission</div>
+      <div class="mission-text">
+        East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong> — a 501(c)(3)
+        nonprofit dedicated to making world-class training accessible to every kid in East Los Angeles
+        and Boyle Heights, regardless of ability to pay.
+      </div>
+      <div class="mission-bold">No student is ever turned away for inability to pay.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <div class="section-label">Your Donation Supports</div>
+      <div class="donation-grid">
+        <div class="donation-item">
+          <div class="donation-dot"></div>
+          <div class="donation-item-text"><strong>Scholarships</strong> — tuition for youth who can't afford to train</div>
+        </div>
+        <div class="donation-item">
+          <div class="donation-dot"></div>
+          <div class="donation-item-text"><strong>Equipment</strong> — gi and gear for students in need</div>
+        </div>
+        <div class="donation-item">
+          <div class="donation-dot"></div>
+          <div class="donation-item-text"><strong>Instructors</strong> — compensation and development</div>
+        </div>
+        <div class="donation-item">
+          <div class="donation-dot"></div>
+          <div class="donation-item-text"><strong>Facility</strong> — keeping the gym open for everyone</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR BANNER -->
+  <div class="qr-banner">
+    <div class="qr-banner-text">SCAN TO <em>GET INVOLVED</em></div>
+  </div>
+
+  <!-- QR CODES -->
+  <div class="qr-section">
+    <div class="qr-item">
+      <div class="qr-box">
+        <div class="qr-placeholder">[ QR CODE ]</div>
+        <div class="qr-placeholder-url">givebutter.com/elajj</div>
+      </div>
+      <div class="qr-label">Donate</div>
+      <div class="qr-sublabel">givebutter.com/elajj</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <div class="qr-placeholder">[ QR CODE ]</div>
+        <div class="qr-placeholder-url">elajj.netlify.app</div>
+      </div>
+      <div class="qr-label">Website</div>
+      <div class="qr-sublabel">elajj.netlify.app</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <div class="qr-placeholder">[ QR CODE ]</div>
+        <div class="qr-placeholder-url">@east_la_jiujitsu</div>
+      </div>
+      <div class="qr-label">Instagram</div>
+      <div class="qr-sublabel">@east_la_jiujitsu</div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div class="closing-line">Every dollar keeps a kid on the mat.</div>
+    <div class="closing-sub">Your support is 100% tax-deductible.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      3660 1st Street, Los Angeles, CA 90063<br>
+      (833) 725-3615 &middot; info@eastlajiujitsu.org
+    </div>
+    <div class="footer-center">501(c)(3) Nonprofit</div>
+    <div class="footer-right">
+      A program of the Ethos Jiu Jitsu Foundation<br>
+      ethosjjfoundation.org
+    </div>
+  </div>
+
+  <!-- EXPORT BUTTON -->
+  <button class="export-btn" onclick="window.print()">Export to PDF</button>
+
+</body>
+</html>
