@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>East LA Jiu Jitsu — Support Our Mission</title>
@@ -35,7 +35,7 @@
     color: var(--text-dark);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
@@ -388,6 +388,20 @@
       print-color-adjust: exact !important;
       color-adjust: exact !important;
     }
+    html, body {
+      width: 8.5in !important;
+      height: 11in !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+    body {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .hero, .stats-bar, .middle, .qr-banner, .qr-section, .closing, .footer {
+      break-inside: avoid;
+    }
   }
 </style>
 </head>
@@ -399,8 +413,8 @@
     <div class="hero-noise"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
-      <img src="logo_white.png" alt="East LA Jiu Jitsu" class="logo-img">
-      <div class="hero-label">East Los Angeles &middot; Since 2022</div>
+      <img src="/logo_white.png" alt="East LA Jiu Jitsu" class="logo-img">
+      <div class="hero-label">East Los Angeles · Since 2022</div>
       <div class="hero-headline">THIS IS<br><em>EAST LA.</em></div>
       <div class="hero-sub">World-Class Jiu-Jitsu For Our Community</div>
       <div class="hero-tagline">
@@ -410,7 +424,7 @@
     </div>
     <div class="hero-cut">
       <svg viewBox="0 0 816 60" preserveAspectRatio="none">
-        <polygon points="0,60 816,0 816,60" fill="#FDFCFA"/>
+        <polygon points="0,60 816,0 816,60" fill="#FDFCFA"></polygon>
       </svg>
     </div>
   </div>
@@ -441,8 +455,11 @@
       <div class="section-label">About The Mission</div>
       <div class="mission-text">
         East LA Jiu Jitsu is a 501(c)(3)
-        nonprofit dedicated to making world-class training accessible to every kid in East Los Angeles
-        and Boyle Heights, regardless of ability to pay. We offer classes Monday through Friday, as well as after-school programs and private and group classes for students on the autism spectrum.
+        nonprofit dedicated to making world-class training accessible to
+ every kid in East Los Angeles
+        and Boyle Heights, regardless of ability to pay. We offer 
+classes Monday through Friday, as well as after-school programs and 
+private and group classes for students on the autism spectrum.
       </div>
       <div class="mission-bold">No student is ever turned away for inability to pay.</div>
     </div>
@@ -512,17 +529,17 @@
   <div class="footer">
     <div class="footer-left">
       3660 1st Street, Los Angeles, CA 90063<br>
-      (833) 725-3615 &middot; info@elajj.com
+      (833) 725-3615 · info@elajj.com
     </div>
     <div class="footer-center">501(c)(3) Nonprofit</div>
     <div class="footer-right">
       East LA Jiu Jitsu<br>
-      <b></b>eastlajiujitsu.org</b>
+      eastlajiujitsu.org
     </div>
   </div>
 
   <!-- EXPORT BUTTON -->
-  <button class="export-btn" onclick="window.print()">Export to PDF</button>
+  <button class="export-btn" onclick="setTimeout(function(){ window.print(); }, 300)">Export to PDF</button>
 
 </body>
 </html>
