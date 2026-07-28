@@ -28,21 +28,22 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.4rem 3rem;
-    transition: background 0.4s, box-shadow 0.4s;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
+    transition: box-shadow 0.3s;
   }
-  nav.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--border); }
+  /* Slightly deeper shadow once the page scrolls under the bar */
+  nav.scrolled { box-shadow: 0 2px 16px rgba(26,23,20,0.08); }
   .nav-logo {
     font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em;
-    color: var(--white); text-decoration: none; line-height: 1; transition: color 0.4s;
+    color: var(--ink); text-decoration: none; line-height: 1;
   }
-  nav.scrolled .nav-logo { color: var(--ink); }
   .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
   .nav-links a {
-    color: rgba(255,255,255,0.7); text-decoration: none;
-    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;
+    color: var(--mid); text-decoration: none;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s;
   }
-  nav.scrolled .nav-links a { color: var(--mid); }
   .nav-links a:hover { color: var(--gold) !important; }
   .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.3rem; border-radius: 1px; }
   .nav-cta:hover { background: var(--gold-light) !important; }
@@ -60,13 +61,13 @@
   .hero-right-grid {
     position: absolute; inset: 0;
     background-image: linear-gradient(rgba(212,146,10,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(212,146,10,0.08) 1px, transparent 1px);
-    background-size: 48px 48px;
+    background-size: 48px 48px; z-index: 0;
   }
   .hero-right-num {
     font-family: 'Bebas Neue', sans-serif; font-size: clamp(14rem, 24vw, 30rem);
-    color: rgba(212,146,10,0.12); line-height: 1; user-select: none; pointer-events: none; position: relative; z-index: 1;
+    color: rgba(212,146,10,0.12); line-height: 1; user-select: none; pointer-events: none; position: relative; z-index: 0;
   }
-  .hero-stats { position: absolute; bottom: 3rem; left: 2rem; z-index: 2; display: flex; flex-direction: column; gap: 0.75rem; }
+  .hero-stats { position: absolute; bottom: 3rem; left: 2rem; z-index: 4; display: flex; flex-direction: column; gap: 0.75rem; }
   .hero-stat {
     background: var(--white); border-left: 3px solid var(--gold); padding: 0.7rem 1.1rem;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08); opacity: 0; animation: fadeIn 0.6s ease forwards;
@@ -133,7 +134,8 @@
   .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--gold); }
   .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem,4vw,3.5rem); font-weight: 400; line-height: 1.1; color: var(--ink); margin-bottom: 3.5rem; }
   .section-title em { font-style: italic; color: var(--gold); }
-  .programs-grid { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--border); }
+  .programs-grid { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--border); }
+  @media (max-width: 1100px) { .programs-grid { grid-template-columns: repeat(2,1fr); } .prog-card:nth-child(2) { border-right: none; } .prog-card { border-bottom: 1px solid var(--border); } }
   .prog-card { padding: 2.5rem; border-right: 1px solid var(--border); transition: background 0.3s; }
   .prog-card:last-child { border-right: none; }
   .prog-card:hover { background: var(--off-white); }
@@ -207,7 +209,8 @@
     .hero { grid-template-columns:1fr; }
     .hero-left { padding:8rem 1.5rem 4rem; min-height:70vh; }
     .hero-left::after { display:none; }
-    .hero-right { min-height:260px; }
+    .hero-right { min-height:300px; }
+    .hero-photo img { object-position: center 28%; }
     .programs-grid { grid-template-columns:1fr; }
     .prog-card { border-right:none; border-bottom:1px solid var(--border); }
     .expect-inner, .location-inner { grid-template-columns:1fr; gap:3rem; }
@@ -231,19 +234,17 @@
     background: var(--ink); border-radius: 2px;
     transition: transform 0.3s, opacity 0.3s;
   }
-  nav:not(.scrolled) .hamburger span { background: var(--white); }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
   .mobile-menu {
-    display: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: var(--white); z-index: 150;
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.25s, visibility 0.25s;
   }
-  .mobile-menu.open { display: flex; }
+  .mobile-menu.open { opacity: 1; visibility: visible; pointer-events: all; }
   .mobile-menu a {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.2rem; letter-spacing: 0.08em;
@@ -265,6 +266,17 @@
   @media (max-width: 900px) {
     .hamburger { display: flex; }
   }
+  .eml, .eml-btn { cursor: pointer; }
+  a.eml { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 0.05em; }
+
+  /* ── HERO PHOTO (right panel) ── */
+  .hero-photo { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+  /* Soft light scrim at the bottom so the white stat cards sit on something */
+  .hero-photo::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(242,237,230,0.78) 0%, rgba(242,237,230,0.42) 14%, rgba(242,237,230,0.14) 28%, rgba(242,237,230,0) 45%);
+  }
 </style>
 </head>
 <body>
@@ -273,7 +285,7 @@
   <a href="#" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
   <ul class="nav-links">
     <li><a href="#programs">Programs</a></li>
-    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="elajj-schedule.html">Schedule</a></li>
     <li><a href="elajj-instructors.html">Instructors</a></li>
     <li><a href="elajj-programs.html">Special Programs</a></li>
     <li><a href="#location">Location</a></li>
@@ -285,7 +297,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">✕</button>
     <a href="#programs">Programs</a>
-    <a href="#schedule">Schedule</a>
+    <a href="elajj-schedule.html">Schedule</a>
     <a href="elajj-instructors.html">Instructors</a>
     <a href="elajj-programs.html">Special Programs</a>
     <a href="#location">Location</a>
@@ -305,6 +317,11 @@
   </div>
   <div class="hero-right">
     <div class="hero-right-grid"></div>
+    <div class="hero-photo">
+      <!-- Drop your photo in as elajj-hero.jpg (landscape, 1600px+ wide). -->
+      <img src="elajj-hero.jpg" alt="Students training at East LA Jiu Jitsu"
+           onerror="this.parentElement.style.display='none'">
+    </div>
     <div class="hero-right-num">01</div>
     <div class="hero-stats">
       <div class="hero-stat"><span class="hero-stat-num">800+</span><span class="hero-stat-label">Students / Year</span></div>
@@ -325,22 +342,28 @@
     <h2 class="section-title reveal">Training for every age. Every <em>level.</em></h2>
     <div class="programs-grid reveal">
       <div class="prog-card">
-        <span class="prog-age">4–7</span>
-        <h3>Little Champions</h3>
-        <p>Movement, coordination, and confidence through age-appropriate jiu-jitsu games and fundamentals. We make it fun — they make it a habit.</p>
-        <span class="prog-tag">Youth</span>
+        <span class="prog-age">5–7</span>
+        <h3>Pee Wees</h3>
+        <p>Gi classes built for our youngest students — movement, coordination, listening skills, and confidence through age-appropriate jiu-jitsu fundamentals.</p>
+        <span class="prog-tag">Gi · Mon / Wed / Fri</span>
       </div>
       <div class="prog-card">
-        <span class="prog-age">8–17</span>
-        <h3>Youth Program</h3>
-        <p>Technique, discipline, and competition prep for kids and teens. Belt progressions, in-house tournaments, and real mentorship from serious coaches.</p>
-        <span class="prog-tag">Youth</span>
+        <span class="prog-age">8–12</span>
+        <h3>Kids</h3>
+        <p>Daily Gi and No-Gi classes focused on technique, discipline, and respect. Kids train hard, make friends, and build habits that last.</p>
+        <span class="prog-tag">Gi &amp; No-Gi · Mon–Fri</span>
       </div>
       <div class="prog-card">
-        <span class="prog-age">18+</span>
-        <h3>Adult Classes</h3>
-        <p>Fundamentals through advanced. Whether you've never trained a day in your life or you're chasing your next belt — there's a class for you.</p>
-        <span class="prog-tag">Adult</span>
+        <span class="prog-age">13–17</span>
+        <h3>Teens</h3>
+        <p>Dedicated teen classes in both Gi and No-Gi, plus access to Adult &amp; Teens sessions — real training for real progress.</p>
+        <span class="prog-tag">Gi &amp; No-Gi · Tue / Thu</span>
+      </div>
+      <div class="prog-card">
+        <span class="prog-age">Adults</span>
+        <h3>Adult &amp; Teens</h3>
+        <p>Morning, midday, and evening classes — Fundamentals and All Levels, Gi and No-Gi, plus Saturday open mat. Every schedule fits.</p>
+        <span class="prog-tag">6 Days a Week</span>
       </div>
     </div>
   </div>
@@ -378,15 +401,16 @@
       <table class="schedule-table">
         <thead><tr><th>Day</th><th>Class</th><th>Time</th></tr></thead>
         <tbody>
-          <tr><td class="sch-day">Mon / Wed</td><td>Little Champions <span class="sch-badge badge-youth">Ages 4–7</span></td><td>4:30 PM</td></tr>
-          <tr><td class="sch-day">Mon / Wed</td><td>Youth Program <span class="sch-badge badge-youth">Ages 8–17</span></td><td>5:30 PM</td></tr>
-          <tr><td class="sch-day">Mon–Wed–Fri</td><td>Adult Fundamentals <span class="sch-badge badge-adult">18+</span></td><td>7:00 PM</td></tr>
-          <tr><td class="sch-day">Tue / Thu</td><td>Youth Open Mat <span class="sch-badge badge-youth">Ages 8–17</span></td><td>5:00 PM</td></tr>
-          <tr><td class="sch-day">Tue / Thu</td><td>Adult Advanced <span class="sch-badge badge-adult">18+</span></td><td>7:00 PM</td></tr>
-          <tr><td class="sch-day">Saturday</td><td>All Ages Open Mat</td><td>10:00 AM</td></tr>
+          <tr><td class="sch-day">Mon–Fri</td><td>Kids <span class="sch-badge badge-youth">Ages 8–12</span></td><td>4:00 PM</td></tr>
+          <tr><td class="sch-day">Mon / Wed / Fri</td><td>Pee Wees <span class="sch-badge badge-youth">Ages 5–7</span></td><td>5:00 PM</td></tr>
+          <tr><td class="sch-day">Tue / Thu</td><td>Teens <span class="sch-badge badge-youth">Ages 13–17</span></td><td>5:00 PM</td></tr>
+          <tr><td class="sch-day">Mon–Fri</td><td>Adult &amp; Teens <span class="sch-badge badge-adult">Fund. / All Levels</span></td><td>6:00 &amp; 7:00 PM</td></tr>
+          <tr><td class="sch-day">Mon / Wed / Fri</td><td>Adult &amp; Teens <span class="sch-badge badge-adult">Gi · All Levels</span></td><td>6:30 AM</td></tr>
+          <tr><td class="sch-day">Saturday</td><td>Adult &amp; Teens Open Mat</td><td>10:30 AM</td></tr>
         </tbody>
       </table>
-      <p class="schedule-note">* Schedule subject to change. Check @east_la_jiujitsu on Instagram for updates.</p>
+      <p class="schedule-note">* All kids classes subject to discretion of the instructor — safety is our number one priority.</p>
+      <a href="elajj-schedule.html" style="display:inline-block;margin-top:1.25rem;font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(212,146,10,0.4);padding-bottom:0.15rem;">View Full Weekly Schedule →</a>
     </div>
   </div>
 </section>
@@ -398,7 +422,7 @@
       <h2 class="section-title">Right in the heart of <em>East LA.</em></h2>
       <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Address</strong><p>3660 1st Street<br>Los Angeles, CA 90063</p></div></div>
       <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Phone</strong><p>(833) 725-3615</p></div></div>
-      <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Email</strong><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5831363e37183d34393232763b3735">[email&#160;protected]</a></p></div></div>
+      <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Email</strong><p><a class="eml" data-u="info" data-d="elajj.com">info [at] elajj.com</a></p></div></div>
       <div class="location-detail"><span class="loc-icon">◎</span><div class="loc-text"><strong>Instagram</strong><p>@east_la_jiujitsu</p></div></div>
       <a href="#trial" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">Book Free Trial</a>
     </div>
@@ -427,7 +451,7 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#programs">Programs</a></li>
-        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="elajj-schedule.html">Schedule</a></li>
         <li><a href="elajj-instructors.html">Instructors</a></li>
         <li><a href="elajj-programs.html">Special Programs</a></li>
         <li><a href="elajj-trial.html">Free Trial Class</a></li>
@@ -437,8 +461,8 @@
     <div class="footer-col">
       <h4>Also</h4>
       <ul>
-        <li><a href="https://eastlajiujitsu.org/bhjj" target="_blank">Boyle Heights JJ</a></li>
-        <li><a href="https://ethosjjfoundation.org" target="_blank">Ethos JJ Foundation</a></li>
+        <li><a href="https://eastlajiujitsu.org/bhjj" target="_blank">Boyle Heights Jiu Jitsu</a></li>
+        <li><a href="https://ethosjjfoundation.org" target="_blank">Ethos Jiu Jitsu Foundation</a></li>
         <li><a href="https://givebutter.com/elajj" target="_blank">Donate / Scholarships</a></li>
         <li><a href="https://eastlajiujitsu.square.site" target="_blank">Store</a></li>
       </ul>
@@ -490,6 +514,22 @@
       document.body.style.overflow = '';
     });
   });
+</script>
+
+<script>
+  /* Email addresses are assembled at runtime so the literal address never
+     appears in the page source — keeps naive scrapers from harvesting it. */
+  (function () {
+    var els = document.querySelectorAll('.eml, .eml-btn');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var u = el.getAttribute('data-u'), d = el.getAttribute('data-d');
+      if (!u || !d) continue;
+      var addr = u + String.fromCharCode(64) + d;
+      if (el.classList.contains('eml')) { el.textContent = addr; }
+      if (el.tagName === 'A') { el.setAttribute('href', 'mailto:' + addr); }
+    }
+  })();
 </script>
 </body>
 </html>
