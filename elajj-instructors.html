@@ -10,8 +10,8 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --black: #0f0e0c; --white: #ffffff; --off-white: #faf8f5; --light: #f2ede6;
-    --gold: #d4920a; --gold-light: #e8a820; --gold-dim: rgba(212,146,10,0.1);
+    --white: #ffffff; --off-white: #faf8f5; --light: #f2ede6;
+    --gold: #d4920a; --gold-light: #e8a820;
     --ink: #1a1714; --mid: #6b6158; --border: #e8e2d9;
   }
   html { scroll-behavior: smooth; }
@@ -26,167 +26,100 @@
   }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em; color: var(--ink); text-decoration: none; line-height: 1; }
   .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-  .nav-links a { color: var(--mid); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--mid); text-decoration: none; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-  .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.3rem; border-radius: 1px; }
-  .nav-cta:hover { background: var(--gold-light) !important; }
-
-  /* PAGE HEADER */
-  .page-header {
-    background: var(--ink); padding: 10rem 3rem 5rem;
-    position: relative; overflow: hidden;
-  }
-  .page-header::after {
-    content: 'COACHES'; position: absolute; bottom: -2rem; right: -1rem;
-    font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 14vw, 16rem);
-    color: rgba(212,146,10,0.06); line-height: 1; pointer-events: none;
-  }
-  .page-header-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-  .section-label {
-    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
-    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem;
-  }
-  .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--gold); }
-  .page-header h1 {
-    font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 7rem);
-    line-height: 0.92; color: var(--white); letter-spacing: 0.01em;
-  }
-  .page-header h1 em { font-style: normal; color: var(--gold); }
-  .page-header p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 540px; line-height: 1.8; margin-top: 1.5rem; }
-
-  /* INSTRUCTOR GRID */
-  .instructors { background: var(--white); padding: 7rem 3rem; }
-  .instructors-inner { max-width: 1100px; margin: 0 auto; }
-  .instructors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
-
-  .instructor-card { background: var(--light); border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s, border-color 0.2s; }
-  .instructor-card:hover { transform: translateY(-4px); border-color: rgba(212,146,10,0.4); }
-  .instructor-photo {
-    width: 100%; aspect-ratio: 3/4; background: var(--border);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.5rem; position: relative; overflow: hidden;
-  }
-  .instructor-photo-placeholder {
-    width: 72px; height: 72px; border-radius: 50%;
-    background: rgba(212,146,10,0.15); border: 2px dashed rgba(212,146,10,0.3);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .instructor-photo-placeholder svg { width: 32px; height: 32px; opacity: 0.3; }
-  .instructor-photo span { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,23,20,0.3); }
-  .instructor-info { padding: 1.75rem; }
-  .instructor-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); margin-bottom: 0.25rem; }
-  .instructor-title { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-  .instructor-belt {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .belt-pip { width: 12px; height: 12px; border-radius: 50%; background: var(--border); border: 1px solid rgba(26,23,20,0.15); }
-  .belt-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
-  .instructor-bio { font-size: 0.85rem; font-weight: 300; color: var(--mid); line-height: 1.7; }
-  .instructor-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
-  .instructor-tag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 1px; }
-
-  /* ADD INSTRUCTOR CTA */
-  .instructor-card.add-card {
-    background: transparent; border: 1px dashed rgba(212,146,10,0.3);
-    display: flex; align-items: center; justify-content: center;
-    min-height: 400px; cursor: pointer;
-  }
-  .add-card-inner { text-align: center; padding: 2rem; }
-  .add-card-inner p { font-size: 0.8rem; font-weight: 300; color: rgba(26,23,20,0.35); margin-top: 0.75rem; line-height: 1.6; }
-
-  /* SECTION DIVIDER */
-  .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.1; color: var(--ink); }
-  .section-title em { font-style: italic; color: var(--gold); }
-
-  /* TRIAL BAND */
-  .trial-band { background: var(--gold); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-  .trial-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: 0.04em; color: var(--white); line-height: 1; }
-  .trial-band p { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.75); margin-top: 0.3rem; }
-  .btn-trial { background: var(--white); color: var(--gold); padding: 1rem 2.4rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; white-space: nowrap; display: inline-block; transition: background 0.2s, transform 0.15s; }
-  .btn-trial:hover { background: var(--off-white); transform: translateY(-2px); }
-
-  /* FOUNDATION BAND */
-  .foundation-band { background: var(--ink); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-  .foundation-band p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 600px; }
-  .foundation-band p strong { color: rgba(255,255,255,0.75); }
-  .foundation-band a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(212,146,10,0.3); padding-bottom: 0.1rem; white-space: nowrap; }
-  .foundation-band a:hover { border-color: var(--gold); }
-
-  footer { background: var(--ink); padding: 4rem 3rem 2.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-  .f-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em; color: var(--white); text-decoration: none; display: block; margin-bottom: 1rem; }
-  .f-logo span { color: var(--gold); }
-  .footer-brand p { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.3); line-height: 1.7; }
-  .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
-  .footer-col ul { list-style: none; }
-  .footer-col li { margin-bottom: 0.65rem; }
-  .footer-col a { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-  .footer-col a:hover { color: var(--gold); }
-  .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.72rem; color: rgba(255,255,255,0.2); flex-wrap: wrap; gap: 0.75rem; }
-
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .page-header { padding: 8rem 1.5rem 4rem; }
-    .instructors { padding: 5rem 1.5rem; }
-    .instructors-grid { grid-template-columns: 1fr 1fr; }
-    .trial-band, .foundation-band { padding: 2rem 1.5rem; }
-    footer { padding: 3rem 1.5rem 2rem; }
-    .footer-inner { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 600px) {
-    .instructors-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── HAMBURGER ── */
-  .hamburger {
-    display: none;
-    flex-direction: column; justify-content: center; gap: 5px;
-    width: 36px; height: 36px; cursor: pointer;
-    background: none; border: none; padding: 4px;
-    z-index: 200;
-  }
-  .hamburger span {
-    display: block; width: 22px; height: 2px;
-    background: var(--ink); border-radius: 2px;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  nav:not(.scrolled) .hamburger span { background: var(--white); }
+  .nav-cta { background: var(--gold) !important; color: #fff !important; padding: 0.55rem 1.3rem; border-radius: 1px; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 200; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
   .mobile-menu {
-    display: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: var(--white); z-index: 150;
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.25s, visibility 0.25s;
   }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem; letter-spacing: 0.08em;
-    color: var(--ink); text-decoration: none;
-    transition: color 0.2s;
-  }
+  .mobile-menu.open { opacity: 1; visibility: visible; pointer-events: all; }
+  .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.08em; color: var(--ink); text-decoration: none; }
   .mobile-menu a:hover { color: var(--gold); }
-  .mobile-menu .mobile-cta {
-    background: var(--gold); color: var(--white) !important;
-    padding: 0.9rem 2.5rem; font-size: 1.4rem;
-    margin-top: 1rem;
-  }
-  .mobile-menu .mobile-close {
-    position: absolute; top: 1.4rem; right: 1.5rem;
-    font-size: 1.8rem; color: var(--mid); cursor: pointer;
-    background: none; border: none; line-height: 1;
-  }
+  .mobile-close { position: absolute; top: 1.4rem; right: 1.5rem; font-size: 1.8rem; color: var(--mid); cursor: pointer; background: none; border: none; line-height: 1; }
 
-  @media (max-width: 900px) {
-    .hamburger { display: flex; }
+  .page-header { background: var(--ink); padding: 9rem 3rem 4.5rem; position: relative; overflow: hidden; }
+  .page-header::after { content: 'COACHES'; position: absolute; bottom: -2rem; right: -1rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem,13vw,15rem); color: rgba(212,146,10,0.07); line-height: 1; pointer-events: none; }
+  .page-header-inner { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+  .section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+  .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--gold); }
+  .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem,6.5vw,6.5rem); line-height: 0.92; color: #fff; letter-spacing: 0.01em; }
+  .page-header h1 em { font-style: normal; color: var(--gold); }
+  .page-header p { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.8; margin-top: 1.2rem; }
+
+  .roster { max-width: 1180px; margin: 0 auto; padding: 4.5rem 3rem 5rem; }
+  .roster-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: start; }
+
+  .inst-card { background: var(--off-white); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.2s; }
+  .inst-card:hover { border-color: rgba(212,146,10,0.4); }
+  .inst-photo { position: relative; width: 100%; aspect-ratio: 4/5; background: var(--light); overflow: hidden; }
+  .inst-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; display: block; }
+  .inst-photo.no-img::after {
+    content: 'Photo'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(212,146,10,0.35);
   }
+  .inst-info { padding: 1.6rem 1.6rem 1.4rem; }
+  .inst-role { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+  .inst-name { font-family: 'DM Serif Display', serif; font-size: 1.45rem; font-weight: 400; color: var(--ink); line-height: 1.1; }
+  .inst-email { margin-top: 0.4rem; font-size: 0.75rem; font-weight: 300; }
+  .inst-email a { color: var(--mid); text-decoration: none; border-bottom: 1px solid rgba(212,146,10,0.35); }
+  .inst-email a:hover { color: var(--gold); }
+  .inst-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 1.1rem; }
+  .inst-tag { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); border: 1px solid var(--border); background: var(--white); padding: 0.22rem 0.55rem; border-radius: 1px; }
+  .inst-teaser { font-size: 0.85rem; font-weight: 300; color: var(--mid); line-height: 1.75; }
+  .inst-full { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .inst-full p { font-size: 0.85rem; font-weight: 300; color: var(--mid); line-height: 1.75; margin-bottom: 0.9rem; }
+  .inst-full p:last-child { margin-bottom: 0; }
+  .inst-sub { font-size: 0.62rem !important; font-weight: 500 !important; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold) !important; margin: 1.1rem 0 0.5rem !important; }
+  .inst-wins { list-style: none; margin-bottom: 0.9rem; }
+  .inst-wins li { font-size: 0.78rem; font-weight: 300; color: var(--mid); line-height: 1.5; padding: 0.28rem 0 0.28rem 0.9rem; position: relative; }
+  .inst-wins li::before { content: ''; position: absolute; left: 0; top: 0.85em; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+  .inst-lineage { font-size: 0.72rem !important; line-height: 1.6 !important; color: var(--mid) !important; background: var(--white); border-left: 2px solid var(--gold); padding: 0.7rem 0.85rem !important; margin-top: 1rem !important; }
+  .inst-lineage span { display: block; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem; }
+
+  .inst-toggle {
+    margin-top: 1.1rem; background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+    padding: 0; border-bottom: 1px solid rgba(212,146,10,0.4);
+    padding-bottom: 0.15rem; transition: border-color 0.2s;
+  }
+  .inst-toggle:hover { border-bottom-color: var(--gold); }
+
+  .trial-band { background: var(--gold); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .trial-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: 0.04em; color: #ffffff; line-height: 1; }
+  .trial-band p { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.78); margin-top: 0.3rem; }
+  .btn-trial { background: #fff; color: var(--gold); padding: 1rem 2.4rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; white-space: nowrap; display: inline-block; transition: background 0.2s, transform 0.15s; }
+  .btn-trial:hover { background: var(--off-white); transform: translateY(-2px); }
+
+  .foundation-band { background: var(--ink); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .foundation-band p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 620px; }
+  .foundation-band p strong { color: rgba(255,255,255,0.78); }
+  .foundation-band a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(212,146,10,0.35); padding-bottom: 0.1rem; white-space: nowrap; }
+
+  footer { background: var(--ink); padding: 3rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer-bottom { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: rgba(255,255,255,0.22); flex-wrap: wrap; gap: 0.75rem; }
+
+  @media (max-width: 1080px) { .roster-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .page-header { padding: 7rem 1.5rem 3.5rem; }
+    .roster { padding: 3rem 1.5rem 4rem; }
+    .trial-band, .foundation-band { padding: 2rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+  }
+  @media (max-width: 620px) { .roster-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -195,165 +128,194 @@
   <a href="elajj.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
   <ul class="nav-links">
     <li><a href="elajj.html#programs">Programs</a></li>
-    <li><a href="elajj.html#schedule">Schedule</a></li>
+    <li><a href="elajj-schedule.html">Schedule</a></li>
     <li><a href="elajj-instructors.html" class="active">Instructors</a></li>
     <li><a href="elajj-programs.html">Special Programs</a></li>
     <li><a href="elajj.html#location">Location</a></li>
-    <li><a href="elajj.html#trial" class="nav-cta">Free Trial</a></li>
+    <li><a href="elajj-trial.html" class="nav-cta">Free Trial</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="mobileClose">✕</button>
-    <a href="elajj.html#programs">Programs</a>
-    <a href="elajj.html#schedule">Schedule</a>
-    <a href="elajj-instructors.html">Instructors</a>
-    <a href="elajj-programs.html">Special Programs</a>
-    <a href="elajj.html#location">Location</a>
-    <a href="elajj.html#trial">Free Trial</a>
+  <button class="mobile-close" id="mobileClose">&#10005;</button>
+  <a href="elajj.html#programs">Programs</a>
+  <a href="elajj-schedule.html">Schedule</a>
+  <a href="elajj-instructors.html">Instructors</a>
+  <a href="elajj-programs.html">Special Programs</a>
+  <a href="elajj.html#location">Location</a>
+  <a href="elajj-trial.html">Free Trial</a>
 </div>
-
 
 <div class="page-header">
   <div class="page-header-inner">
     <p class="section-label">Our Team</p>
-    <h1>THE COACHES<br>BEHIND <em>ELAJJ.</em></h1>
-    <p>Every instructor at East LA Jiu Jitsu is more than a coach — they're mentors, neighbors, and practitioners who believe jiu-jitsu changes lives. Meet the people who show up every day.</p>
+    <h1>MEET THE<br><em>INSTRUCTORS.</em></h1>
+    <p>Black belts, competitors, referees, and mentors &mdash; every coach here believes jiu jitsu builds character first. Many started in social projects themselves, and now they teach because someone once made room for them on the mat.</p>
   </div>
 </div>
 
-<section class="instructors">
-  <div class="instructors-inner">
-    <p class="section-label">Instructors</p>
-    <h2 class="section-title">Meet the <em>team.</em></h2>
-
-    <div class="instructors-grid">
-
-      <!-- Placeholder card 1 -->
-      <div class="instructor-card">
-        <div class="instructor-photo">
-          <div class="instructor-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <span>Photo coming soon</span>
+<section class="roster">
+  <div class="roster-grid">
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/173bf207-1e45-4c03-a72f-7b00a1b7bb22/IMG_2655.JPG?format=750w" alt="Ron Mukai, Founder / Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
         </div>
-        <div class="instructor-info">
-          <p class="instructor-title">Head Instructor</p>
-          <h3 class="instructor-name">Instructor Name</h3>
-          <div class="instructor-belt">
-            <span class="belt-pip" style="background:#4a3728;"></span>
-            <span class="belt-label">Belt · X Stripes</span>
-          </div>
-          <p class="instructor-bio">Bio coming soon. This instructor brings years of experience and a deep commitment to the East LA community. Their teaching style emphasizes fundamentals, discipline, and personal growth.</p>
-          <div class="instructor-tags">
-            <span class="instructor-tag">Youth</span>
-            <span class="instructor-tag">Adult</span>
-            <span class="instructor-tag">Competition</span>
-          </div>
+        <div class="inst-info">
+          <p class="inst-role">Founder / Instructor</p>
+          <h3 class="inst-name">Ron Mukai</h3>
+          <p class="inst-email"><a class="eml" data-u="ron" data-d="elajj.com">ron [at] elajj.com</a></p>
+          <div class="inst-tags"><span class="inst-tag">Black Belt</span><span class="inst-tag">Founder</span></div>
+          <p class="inst-teaser">Ron started jiu jitsu at the age of 39, earned his black belt in 2017, and is a founder or partner in several schools &mdash; Ethos Jiu Jitsu in Fullerton (2016), East LA Jiu Jitsu (2022), 2002 Jiu Jitsu in Boston (2024), and Boyle Heights Jiu Jitsu (2025). A recovering lawyer, broker, and real estate developer, his real passion is building character through jiu jitsu.</p>
+          <div class="inst-full" id="bio0" hidden><p>Ron Mukai is 55 years old and still alive, by the grace of God. He&rsquo;s also married to his awesome wife Wendy and has 4 awesome kids and 1 awesome daughter-in-law, also by the grace of God.</p><p>Ron continues to train daily, as well as teach classes, mentor youth, run his real estate businesses and lead the non-profit (and occasionally sleep). For Ron, the process of jiu jitsu completely changed every aspect of his life, his health, and how he faced personal hardship. This perspective allows him to teach smaller, weaker, slower individuals to overcome their physical (and mental) shortcomings and use the techniques of jiu jitsu to control much bigger, stronger and faster opponents.</p><p>Ron has deep roots in East LA. His grandparents moved to East LA in the 1920s. Ron&rsquo;s parents were both born in East LA and met at Garfield High. Ron was born at White Memorial hospital and has been intimately involved in East LA community and business affairs since 1995. He is a practicing attorney, broker and commercial real estate developer in East LA. In 2003 he developed and still owns and manages East LA Civic Center Plaza on the corner of 3rd Street and Mednik Ave.</p><p>Ron sees many parallels between his Christian faith and the principles of jiu jitsu including faith, humility, perseverance, courage, loyalty and self control. He has been married to his beautiful wife, Wendy (also a black belt) for the last 25 years and shares the mat with his 4 awesome kids: Diego (20, brown belt), Xanti (17, blue belt), Mila (12, grey belt) and Eze (8, grey belt), and daughter-in-law Emily (white belt with 1 stripe!).</p><p>Ron occasionally competes and won a gold medal as a black belt at the 2023 IBJJF Orange County Open, as well as a silver medal at the IBJJF Pans as a brown belt.</p><p>Ron also serves on the Board of Directors for Movements of Grace, a non-profit serving impoverished communities in Colombia and Venezuela, and on the Board of his church, Calvary La Habra.</p><p>Ron&rsquo;s motto is &ldquo;today is the best day of my life,&rdquo; so today is going to be the best day of his life!</p><p class="inst-lineage"><span>Lineage</span>Helio Gracie &rarr; Royler Gracie (Gracie Humaita) &rarr; Cleber Luciano (Cleber Jiu Jitsu) &rarr; William Tetsch (Leon Jiu Jitsu)</p></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio0">Read full bio</button>
         </div>
-      </div>
-
-      <!-- Placeholder card 2 -->
-      <div class="instructor-card">
-        <div class="instructor-photo">
-          <div class="instructor-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <span>Photo coming soon</span>
+      </article>
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/f07635a1-863d-4de1-9c8f-cc296fd73eba/IMG_2654.JPG?format=750w" alt="Scott Torres, Founder / Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
         </div>
-        <div class="instructor-info">
-          <p class="instructor-title">Youth Instructor</p>
-          <h3 class="instructor-name">Instructor Name</h3>
-          <div class="instructor-belt">
-            <span class="belt-pip" style="background:#4a3728;"></span>
-            <span class="belt-label">Belt · X Stripes</span>
-          </div>
-          <p class="instructor-bio">Bio coming soon. Specializing in youth development, this instructor creates a safe, encouraging environment where kids can build confidence and discipline through jiu-jitsu.</p>
-          <div class="instructor-tags">
-            <span class="instructor-tag">Little Champions</span>
-            <span class="instructor-tag">Youth</span>
-          </div>
+        <div class="inst-info">
+          <p class="inst-role">Founder / Instructor</p>
+          <h3 class="inst-name">Scott Torres</h3>
+          
+          <div class="inst-tags"><span class="inst-tag">Black Belt</span><span class="inst-tag">Founder</span></div>
+          <p class="inst-teaser">Scott began training Brazilian Jiu Jitsu in 2010 upon his discharge from active service in the United States Navy. A lifelong wrestler, he was awarded his black belt by Professor Johnny Ramirez in July of 2019.</p>
+          <div class="inst-full" id="bio1" hidden><p>Scott wanted something more than what traditional gyms had to offer, and began his jiu jitsu training at Newbreed Mixed Martial Arts under the guidance of Professor Johnny Ramirez.</p><p>In 2012, Scott showed interest in teaching and began as an assistant instructor in various kids classes at Newbreed. Over the years he was given additional opportunities to instruct adult classes at the beginner level. By 2018, Scott became one of many instructors responsible for teaching adult jiu jitsu at all levels, and alongside Professor Ramirez he instructed and coached the Newbreed competition team.</p><p>Scott is a Christian, and has found commonality between the road to black belt and his walk with the Lord.</p><p>Scott is a professional historian. Over the 9 years he trained full time, he completed both undergraduate and graduate degrees from CSU Fullerton. He currently works as an Architectural Historian in the city of Pasadena.</p><p>Scott&rsquo;s love for jiu jitsu and history has led him to various states and countries. He studied history and trained jiu jitsu while living in Berlin, Germany for a summer &mdash; a stay that led to many great friendships and invitations to train all over the city.</p><p>Scott has been married to his wife Jessica for three years. While not training, Scott and Jessica enjoy spending time at the beach and taking long walks with their German Shepherd, Sunny.</p><p class="inst-lineage"><span>Lineage</span>Carlson Gracie Sr. &rarr; Rodrigo Medeiros (BJJ Revolution Team) &rarr; Johnny Ramirez</p></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio1">Read full bio</button>
         </div>
-      </div>
-
-      <!-- Placeholder card 3 -->
-      <div class="instructor-card">
-        <div class="instructor-photo">
-          <div class="instructor-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          </div>
-          <span>Photo coming soon</span>
+      </article>
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/a15b34e3-8fb8-4183-a4cf-0a042dc30ed9/IMG_2638.JPG?format=750w" alt="Rodnei (Roy) Barbosa, Head Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
         </div>
-        <div class="instructor-info">
-          <p class="instructor-title">Adult Instructor</p>
-          <h3 class="instructor-name">Instructor Name</h3>
-          <div class="instructor-belt">
-            <span class="belt-pip" style="background:#4a3728;"></span>
-            <span class="belt-label">Belt · X Stripes</span>
-          </div>
-          <p class="instructor-bio">Bio coming soon. This instructor works with adult students at all levels — from first-timers to experienced competitors — with a focus on technique, consistency, and growth.</p>
-          <div class="instructor-tags">
-            <span class="instructor-tag">Adult Fundamentals</span>
-            <span class="instructor-tag">Advanced</span>
-          </div>
+        <div class="inst-info">
+          <p class="inst-role">Head Instructor</p>
+          <h3 class="inst-name">Rodnei (Roy) Barbosa</h3>
+          
+          <div class="inst-tags"><span class="inst-tag">2nd Degree Black Belt</span><span class="inst-tag">Competition</span></div>
+          <p class="inst-teaser">Rodnei is a 2nd degree black belt in Brazilian Jiu Jitsu, training since 2004 and a black belt since 2015. He started in a social project in Formiga, Brazil under Professor Louren&ccedil;o Nascimento and began competing at 10 years old.</p>
+          <div class="inst-full" id="bio2" hidden><p>Born in the small city of Formiga, Minas Gerais, Rodnei fell in love with the art early and went on to win many national and international tournaments including the Brazilian Nationals, South American, European, World Pro and IBJJF No-Gi Worlds.</p><p>In 2019 he moved to Doha, Qatar, where he worked as a jiu jitsu and self defense coach for the National Service in Qatar.</p><p>Rodnei also has extensive experience teaching jiu jitsu to kids and adults, dating back to 2013. He moved to the United States in March of 2023 with his wife, Karen, and currently teaches at Ethos Jiu Jitsu Fullerton and East LA Jiu Jitsu.</p></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio2">Read full bio</button>
         </div>
-      </div>
-
-      <!-- Add instructor placeholder -->
-      <div class="instructor-card add-card">
-        <div class="add-card-inner">
-          <p style="font-size:2rem;color:rgba(212,146,10,0.3);">+</p>
-          <p>More instructors<br>coming soon</p>
+      </article>
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/2109b98d-6ebe-489f-8cc8-c96541d5848a/IMG_2641.JPG?format=750w" alt="Filipe Pimentel, Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
         </div>
-      </div>
-
-    </div>
+        <div class="inst-info">
+          <p class="inst-role">Instructor</p>
+          <h3 class="inst-name">Filipe Pimentel</h3>
+          
+          <div class="inst-tags"><span class="inst-tag">2nd Degree Black Belt</span><span class="inst-tag">IBJJF Referee</span></div>
+          <p class="inst-teaser">Filipe is a second degree black belt in Brazilian Jiu Jitsu, training since 2009 and starting at age 14 in a social project in a poor community in Brazil. He is also an international referee who has officiated the world&rsquo;s biggest tournaments.</p>
+          <div class="inst-full" id="bio3" hidden><p>Filipe started his competitive career in 2011, winning at the state, national and international level. In 2013 he began his refereeing career and has since refereed internationally at the largest tournaments in the world, including the Worlds, Pans, European, South American, Brazilian and American Nationals from the IBJJF/CBJJ/USBJJ federations, and World Pro, Grand Slams and Nationals from the AJP/ADWPJJC federations, among many others.</p><p>He has also been teaching since 2015 at both regular academies and social projects. Besides jiu jitsu, Filipe has trained and competed in American football, basketball, judo, CrossFit, tennis and capoeira.</p><p>Filipe is also a civil engineer, graduating from university in 2018 and actively licensed in Brazil since 2020. He currently teaches at Ethos Jiu Jitsu Fullerton and East LA Jiu Jitsu.</p></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio3">Read full bio</button>
+        </div>
+      </article>
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/6ba926a7-2a99-4854-9af7-677bf13f48c9/IMG_2656.jpg?format=750w" alt="Jerardo (Jerry) Linares, Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
+        </div>
+        <div class="inst-info">
+          <p class="inst-role">Instructor</p>
+          <h3 class="inst-name">Jerardo (Jerry) Linares</h3>
+          
+          <div class="inst-tags"><span class="inst-tag">2nd Degree Black Belt</span><span class="inst-tag">Ethos Founder</span></div>
+          <p class="inst-teaser">Jerardo is a second degree black belt, one of the founders of Ethos Jiu-Jitsu, and has been training for over 20 years. He teaches a morning class at East LA Jiu Jitsu and visits night classes to train with the students.</p>
+          <div class="inst-full" id="bio4" hidden><p>Jerardo first got introduced to jiu-jitsu while attending San Diego State University, joining the local college jiu-jitsu club while studying Business Finance. Before starting jiu-jitsu he played soccer for many years, and still enjoys kicking the ball around.</p><p>Jerardo is passionate about coaching his students to be better human beings through jiu-jitsu, and is an active competitor.</p><p>When not teaching he works as a Real Estate Broker for Millenia Real Estate, a local company he founded. When not working he enjoys spending time with his wife Kimberly and their two dogs, Dexter and Rio. They enjoy riding bikes along the LA River, camping and hiking.</p></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio4">Read full bio</button>
+        </div>
+      </article>
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/99685950-63c6-4c4b-9f31-922928e73b9b/IMG_8414.JPG?format=750w" alt="Wendy Mukai, Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
+        </div>
+        <div class="inst-info">
+          <p class="inst-role">Instructor</p>
+          <h3 class="inst-name">Wendy Mukai</h3>
+          
+          <div class="inst-tags"><span class="inst-tag">Black Belt</span><span class="inst-tag">Kids &amp; Adults</span></div>
+          <p class="inst-teaser">Wendy received her black belt on the podium of the IBJJF Master Worlds in the summer of 2023, after decisively winning her division as a brown belt. She helps teach both the kids and adult classes and continues to train daily.</p>
+          <div class="inst-full" id="bio5" hidden><p>In addition to her coaching role at East LA Jiu Jitsu, Wendy and her husband Ron are part owners of Ethos Jiu Jitsu in Fullerton, CA. Wendy also competes and has won gold as both a blue belt and a brown belt at the IBJJF Master Worlds, the most prestigious tournament in the world for competitors over 30.</p><p>Wendy&rsquo;s path to jiu jitsu happened later in life, alongside her husband, when they signed up their then 5-year-old son in 2009 &mdash; and the process completely changed every aspect of her life. She spent 7 years off the mat raising a family of fighters. One by one, all her children trained and gave her a greater desire to one day practice the art herself. After her fourth and final child was born, she was able to train alongside her family.</p><p>Jiu jitsu changed her perspective about being a smaller, weaker, slower individual with health problems. She had to overcome her physical shortcomings and use technique to control much bigger, stronger and faster opponents. She sees jiu jitsu as a passion to express herself artistically, spiritually and relationally, and loves how its principles apply to their Christian faith and everyday life.</p><p>Wendy has deep roots in Latin culture as a first generation Mexican. She was born in G&oacute;mez Palacio, Durango, Mexico and came to the United States at the age of 3. Raised in Orange County, she was the first grandchild in her family to graduate from college. Wendy graduated from FIDM (Fashion Institute of Design and Merchandising) and had a 10 year career as a fashion designer.</p><p>She and Ron have 4 kids: Diego, Xanti, Mila and Eze. Her entire family trains jiu jitsu together.</p><p class="inst-lineage"><span>Lineage</span>Helio Gracie &rarr; Royler Gracie (Gracie Humaita) &rarr; Cleber Luciano (Cleber Jiu Jitsu) &rarr; William Tetsch (Leon Jiu Jitsu) &rarr; Ron Mukai and Jerardo Linares (Ethos Jiu Jitsu)</p></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio5">Read full bio</button>
+        </div>
+      </article>
+      <article class="inst-card">
+        <div class="inst-photo">
+          <img src="https://images.squarespace-cdn.com/content/v1/61bfc2e083a809192119a7ee/aa201143-42cc-4e21-a964-84c1179555b4/Screenshot+2025-02-07+at+5.35.57%E2%80%AFPM.png?format=750w" alt="Leo Vilela, Instructor at East LA Jiu Jitsu" loading="lazy"
+               onerror="this.closest('.inst-photo').classList.add('no-img')">
+        </div>
+        <div class="inst-info">
+          <p class="inst-role">Instructor</p>
+          <h3 class="inst-name">Leo Vilela</h3>
+          
+          <div class="inst-tags"><span class="inst-tag">Black Belt</span><span class="inst-tag">Competition</span></div>
+          <p class="inst-teaser">Leonardo de Barros Vilela (L&eacute;o) is a black belt in Brazilian Jiu-Jitsu, earning his black belt in June 2023. He began training at age 6 in a social project in Po&ccedil;o Fundo, Brazil, and has been passionate about giving back to his community ever since.</p>
+          <div class="inst-full" id="bio6" hidden><p>L&eacute;o moved to a larger city to train with Professor Paulo Cezar Rezende, where he competed successfully in the Brazilian Nationals and South American Championships.</p><p>His international achievements include standout performances at the European IBJJF (2020, 2022), AJP Grand Slam London (2022), and World Pro (2021). L&eacute;o is recognized for his skill and dedication, both on and off the mat.</p><p class="inst-sub">Select Titles</p><ul class="inst-wins"><li>1st place London Open IBJJF (2024)</li><li>2nd place Orange County Open (2024)</li><li>3rd place World Pro Abu Dhabi AJP</li><li>3&times; 2nd place Brazilian Nationals IBJJF</li><li>3rd place South American IBJJF (Black Belt)</li><li>1st place South American AJP</li><li>1st place Brazilian National CBJJE</li><li>1st place Balne&aacute;rio Cambori&uacute; Open IBJJF (2023)</li><li>3rd place European Championship IBJJF (2023)</li></ul></div>
+          <button class="inst-toggle" type="button" aria-expanded="false" aria-controls="bio6">Read full bio</button>
+        </div>
+      </article>
   </div>
 </section>
 
 <div class="trial-band">
-  <div><h2>Train with our team. First class free.</h2><p>Come in and meet the coaches in person. No commitment required.</p></div>
-  <a href="elajj.html#trial" class="btn-trial">Book Your Free Trial</a>
+  <div><h2>Train with our team. First class free.</h2><p>Come meet the coaches in person &mdash; no gear or experience required.</p></div>
+  <a href="elajj-trial.html" class="btn-trial">Book Your Free Trial</a>
 </div>
 
 <div class="foundation-band">
-  <p>East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong>, a 501(c)(3) nonprofit organization. Scholarships available — no student turned away for cost.</p>
-  <a href="ethos-jj-foundation.html">Learn About the Foundation →</a>
+  <p>East LA Jiu Jitsu is a program of the <strong>Ethos Jiu Jitsu Foundation</strong>, a 501(c)(3) nonprofit organization. Scholarships available &mdash; no student turned away for cost.</p>
+  <a href="ethos-jj-foundation.html">Learn About the Foundation &rarr;</a>
 </div>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <a href="elajj.html" class="f-logo">EAST LA <span>JIU JITSU</span></a>
-      <p>World-class jiu-jitsu in East Los Angeles. A program of the Ethos Jiu Jitsu Foundation.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <ul>
-        <li><a href="elajj.html#programs">Programs</a></li>
-        <li><a href="elajj.html#schedule">Schedule</a></li>
-        <li><a href="elajj-instructors.html">Instructors</a></li>
-        <li><a href="elajj-programs.html">Special Programs</a></li>
-        <li><a href="elajj.html#trial">Free Trial Class</a></li>
-        <li><a href="elajj.html#location">Location</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Also</h4>
-      <ul>
-        <li><a href="bhjj.html">Boyle Heights JJ</a></li>
-        <li><a href="ethos-jj-foundation.html">Ethos JJ Foundation</a></li>
-        <li><a href="https://givebutter.com/elajj" target="_blank">Donate / Scholarships</a></li>
-        <li><a href="https://eastlajiujitsu.square.site" target="_blank">Store</a></li>
-      </ul>
-    </div>
-  </div>
   <div class="footer-bottom">
-    <span>© 2026 East LA Jiu Jitsu · A program of the Ethos Jiu Jitsu Foundation</span>
-    <span>3660 1st Street, Los Angeles, CA 90063 · (833) 725-3615</span>
+    <span>&copy; 2026 East LA Jiu Jitsu &middot; A program of the Ethos Jiu Jitsu Foundation</span>
+    <span>3660 1st Street, Los Angeles, CA 90063 &middot; (833) 725-3615</span>
   </div>
 </footer>
 
+<script>
+  /* Email assembled at runtime so the literal address is not in the page source. */
+  (function () {
+    var els = document.querySelectorAll('.eml, .eml-btn');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var u = el.getAttribute('data-u'), d = el.getAttribute('data-d');
+      if (!u || !d) continue;
+      var addr = u + String.fromCharCode(64) + d;
+      if (el.classList.contains('eml')) { el.textContent = addr; }
+      if (el.tagName === 'A') { el.setAttribute('href', 'mailto:' + addr); }
+    }
+  })();
+
+  /* Expand / collapse full bios */
+  var toggles = document.querySelectorAll('.inst-toggle');
+  for (var t = 0; t < toggles.length; t++) {
+    toggles[t].addEventListener('click', function () {
+      var bio = document.getElementById(this.getAttribute('aria-controls'));
+      var open = bio.hasAttribute('hidden');
+      if (open) { bio.removeAttribute('hidden'); } else { bio.setAttribute('hidden', ''); }
+      this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      this.textContent = open ? 'Hide full bio' : 'Read full bio';
+    });
+  }
+
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', function () { mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+  document.getElementById('mobileClose').addEventListener('click', closeMenu);
+  var mlinks = mobileMenu.querySelectorAll('a');
+  for (var j = 0; j < mlinks.length; j++) { mlinks[j].addEventListener('click', closeMenu); }
+</script>
 </body>
 </html>

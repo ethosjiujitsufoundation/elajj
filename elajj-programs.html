@@ -146,15 +146,14 @@
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
   .mobile-menu {
-    display: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: var(--white); z-index: 150;
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.25s, visibility 0.25s;
   }
-  .mobile-menu.open { display: flex; }
+  .mobile-menu.open { opacity: 1; visibility: visible; pointer-events: all; }
   .mobile-menu a {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.2rem; letter-spacing: 0.08em;
@@ -180,6 +179,8 @@
   /* Button group — fixes alignment */
   .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; align-items: center; }
   .btn-ghost-dark { margin-left: 0; }
+  .eml, .eml-btn { cursor: pointer; }
+  a.eml { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 0.05em; }
 </style>
 </head>
 <body>
@@ -188,7 +189,7 @@
   <a href="elajj.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
   <ul class="nav-links">
     <li><a href="elajj.html#programs">Programs</a></li>
-    <li><a href="elajj.html#schedule">Schedule</a></li>
+    <li><a href="elajj-schedule.html">Schedule</a></li>
     <li><a href="elajj-instructors.html">Instructors</a></li>
     <li><a href="elajj-programs.html" class="active">Special Programs</a></li>
     <li><a href="elajj.html#location">Location</a></li>
@@ -200,7 +201,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">✕</button>
     <a href="elajj.html#programs">Programs</a>
-    <a href="elajj.html#schedule">Schedule</a>
+    <a href="elajj-schedule.html">Schedule</a>
     <a href="elajj-instructors.html">Instructors</a>
     <a href="elajj-programs.html">Special Programs</a>
     <a href="elajj.html#location">Location</a>
@@ -235,11 +236,11 @@
         <li><strong>Location</strong><span>3660 1st Street, Los Angeles, CA 90063</span></li>
         <li><strong>Format</strong><span>Small group classes with adaptive instruction</span></li>
         <li><strong>Cost</strong><span>Funded through regional center services or scholarship</span></li>
-        <li><strong>Contact</strong><span>(833) 725-3615 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e881868e87a88d84898282c68b8785">[email&#160;protected]</a></span></li>
+        <li><strong>Contact</strong><span>(833) 725-3615 · <a class="eml" data-u="info" data-d="elajj.com">info [at] elajj.com</a></span></li>
       </ul>
 
       <div class="btn-group">
-        <a href="/cdn-cgi/l/email-protection#2841464e47684d44494242064b4745" class="btn-primary">Get in Touch</a>
+        <a class="btn-primary eml-btn" data-u="info" data-d="elajj.com">Get in Touch</a>
         <a href="https://www.elarc.org" target="_blank" class="btn-ghost-dark">East LA Regional Center →</a>
       </div>
     </div>
@@ -303,12 +304,12 @@
         <li><strong>Private / Small Group</strong><span>Personalized instruction tailored to the student · Starting at $200/session</span></li>
         <li><strong>Free Trial</strong><span>First class free for all new students</span></li>
         <li><strong>Location</strong><span>3660 1st Street, Los Angeles, CA 90063</span></li>
-        <li><strong>Contact</strong><span>(833) 725-3615 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea83848c85aa8f868b8080c4898587">[email&#160;protected]</a></span></li>
+        <li><strong>Contact</strong><span>(833) 725-3615 · <a class="eml" data-u="info" data-d="elajj.com">info [at] elajj.com</a></span></li>
       </ul>
 
       <div class="btn-group">
         <a href="elajj.html#trial" class="btn-primary">Book a Free Trial</a>
-        <a href="/cdn-cgi/l/email-protection#51383f373e11343d303b3b7f323e3c" class="btn-ghost-dark">Contact Us</a>
+        <a class="btn-ghost-dark eml-btn" data-u="info" data-d="elajj.com">Contact Us</a>
       </div>
     </div>
     <div>
@@ -331,7 +332,7 @@
         <div><strong>Phone</strong><span>(833) 725-3615</span></div>
       </div>
       <div class="contact-item">
-        <div><strong>Email</strong><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bad3d4dcd5fadfd6dbd0d094d9d5d7">[email&#160;protected]</a></span></div>
+        <div><strong>Email</strong><span><a class="eml" data-u="info" data-d="elajj.com">info [at] elajj.com</a></span></div>
       </div>
       <div class="contact-item">
         <div><strong>Address</strong><span>3660 1st Street, Los Angeles, CA 90063</span></div>
@@ -358,7 +359,7 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="elajj.html#programs">Programs</a></li>
-        <li><a href="elajj.html#schedule">Schedule</a></li>
+        <li><a href="elajj-schedule.html">Schedule</a></li>
         <li><a href="elajj-instructors.html">Instructors</a></li>
         <li><a href="elajj-programs.html">Special Programs</a></li>
         <li><a href="elajj.html#trial">Free Trial Class</a></li>
@@ -368,8 +369,8 @@
     <div class="footer-col">
       <h4>Also</h4>
       <ul>
-        <li><a href="bhjj.html">Boyle Heights JJ</a></li>
-        <li><a href="ethos-jj-foundation.html">Ethos JJ Foundation</a></li>
+        <li><a href="bhjj.html">Boyle Heights Jiu Jitsu</a></li>
+        <li><a href="ethos-jj-foundation.html">Ethos Jiu Jitsu Foundation</a></li>
         <li><a href="https://givebutter.com/elajj" target="_blank">Donate / Scholarships</a></li>
         <li><a href="https://eastlajiujitsu.square.site" target="_blank">Store</a></li>
       </ul>
@@ -381,7 +382,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   const nav = document.getElementById('nav');
@@ -418,6 +419,22 @@
   });
   document.getElementById('mobileClose').addEventListener('click', closeMenu);
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+</script>
+
+<script>
+  /* Email addresses are assembled at runtime so the literal address never
+     appears in the page source — keeps naive scrapers from harvesting it. */
+  (function () {
+    var els = document.querySelectorAll('.eml, .eml-btn');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var u = el.getAttribute('data-u'), d = el.getAttribute('data-d');
+      if (!u || !d) continue;
+      var addr = u + String.fromCharCode(64) + d;
+      if (el.classList.contains('eml')) { el.textContent = addr; }
+      if (el.tagName === 'A') { el.setAttribute('href', 'mailto:' + addr); }
+    }
+  })();
 </script>
 </body>
 </html>

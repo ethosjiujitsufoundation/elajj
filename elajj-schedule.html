@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Schedule | East LA Jiu Jitsu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff; --off-white: #faf8f5; --light: #f2ede6;
+    --gold: #d4920a; --gold-light: #e8a820;
+    --ink: #1a1714; --mid: #6b6158; --border: #e8e2d9;
+    --c-peewees: #e8a820; --c-kids: #d4920a; --c-teens: #9a6a08; --c-adult: #3d352c;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 0.12em; color: var(--ink); text-decoration: none; line-height: 1; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--mid); text-decoration: none; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.3rem; border-radius: 1px; }
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 200; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--white); z-index: 150; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.25s, visibility 0.25s; }
+  .mobile-menu.open { opacity: 1; visibility: visible; pointer-events: all; }
+  .mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.08em; color: var(--ink); text-decoration: none; }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close { position: absolute; top: 1.4rem; right: 1.5rem; font-size: 1.8rem; color: var(--mid); cursor: pointer; background: none; border: none; line-height: 1; }
+
+  .page-header { background: var(--ink); padding: 9rem 3rem 4.5rem; position: relative; overflow: hidden; }
+  .page-header::after { content: 'SCHEDULE'; position: absolute; bottom: -2rem; right: -1rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem,12vw,14rem); color: rgba(212,146,10,0.06); line-height: 1; pointer-events: none; }
+  .page-header-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+  .section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+  .section-label::before { content: ''; display: block; width: 2rem; height: 2px; background: var(--gold); }
+  .page-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 6rem); line-height: 0.92; color: var(--white); letter-spacing: 0.01em; }
+  .page-header h1 em { font-style: normal; color: var(--gold); }
+  .page-header p { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.8; margin-top: 1.2rem; }
+
+  .main { max-width: 1240px; margin: 0 auto; padding: 3.5rem 3rem 5rem; }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.9rem; }
+  .filter-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-right: 0.35rem; }
+  .fbtn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--mid); background: var(--white);
+    border: 1px solid var(--border); padding: 0.5rem 0.95rem;
+    border-radius: 1px; cursor: pointer;
+    transition: border-color 0.18s, color 0.18s, background 0.18s;
+  }
+  .fbtn:hover { border-color: rgba(212,146,10,0.5); color: var(--ink); }
+  .fbtn .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .fbtn.on { background: var(--ink); border-color: var(--ink); color: var(--white); }
+  .fbtn.on:hover { color: var(--white); }
+  .fbtn.all-btn.on { background: var(--gold); border-color: var(--gold); }
+  .filter-count { font-size: 0.75rem; font-weight: 300; color: var(--mid); margin-bottom: 2rem; }
+
+  /* WEEK GRID */
+  .grid-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .week-grid {
+    display: grid;
+    border: 1px solid var(--border); border-bottom: none; border-right: none;
+  }
+  .gcell { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); padding: 0.7rem; }
+  .ghead {
+    background: var(--ink); color: var(--white);
+    font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.1em;
+    text-align: center; padding: 0.85rem 0.5rem; border-color: rgba(255,255,255,0.1);
+  }
+  .gtime {
+    background: var(--off-white);
+    font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.03em;
+    color: var(--ink); display: flex; align-items: center; justify-content: center;
+    text-align: center; line-height: 1.15;
+  }
+
+  .cls { display: block; border-left: 3px solid; padding: 0.55rem 0.65rem; border-radius: 1px; }
+  .cls-name { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink); line-height: 1.25; }
+  .cls-meta { display: block; font-size: 0.68rem; font-weight: 300; color: var(--mid); margin-top: 0.2rem; line-height: 1.3; }
+  .cls-tag { display: inline-block; margin-top: 0.35rem; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.14rem 0.4rem; border-radius: 1px; border: 1px solid; }
+  .tag-gi { color: var(--gold); border-color: rgba(212,146,10,0.35); background: rgba(212,146,10,0.07); }
+  .tag-nogi { color: var(--mid); border-color: rgba(26,23,20,0.16); background: rgba(26,23,20,0.03); }
+  .tag-open { color: var(--ink); border-color: rgba(26,23,20,0.16); background: rgba(26,23,20,0.03); }
+
+  .cat-peewees { border-left-color: var(--c-peewees); background: rgba(232,168,32,0.07); }
+  .cat-kids    { border-left-color: var(--c-kids);    background: rgba(212,146,10,0.07); }
+  .cat-teens   { border-left-color: var(--c-teens);   background: rgba(154,106,8,0.08); }
+  .cat-adult   { border-left-color: var(--c-adult);   background: rgba(61,53,44,0.05); }
+
+  .empty-state { padding: 3.5rem 1.5rem; text-align: center; border: 1px solid var(--border); }
+  .empty-state p { font-size: 0.9rem; font-weight: 300; color: var(--mid); }
+
+  .scroll-hint-note { font-size: 0.7rem; font-weight: 300; color: var(--mid); margin-top: 0.75rem; display: none; }
+  .schedule-note { font-size: 0.78rem; font-weight: 300; color: var(--mid); font-style: italic; margin-top: 2rem; line-height: 1.7; }
+
+  .trial-band { background: var(--gold); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .trial-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: 0.04em; color: var(--white); line-height: 1; }
+  .trial-band p { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.75); margin-top: 0.3rem; }
+  .btn-trial { background: var(--white); color: var(--gold); padding: 1rem 2.4rem; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 1px; white-space: nowrap; display: inline-block; transition: background 0.2s, transform 0.15s; }
+  .btn-trial:hover { background: var(--off-white); transform: translateY(-2px); }
+
+  footer { background: var(--ink); padding: 3rem; }
+  .footer-bottom { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: rgba(255,255,255,0.2); flex-wrap: wrap; gap: 0.75rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .page-header { padding: 7rem 1.5rem 3.5rem; }
+    .main { padding: 2.5rem 1.5rem 4rem; }
+    .scroll-hint-note { display: block; }
+    .trial-band { padding: 2rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="elajj.html" class="nav-logo">EAST LA <span>JIU JITSU</span></a>
+  <ul class="nav-links">
+    <li><a href="elajj.html#programs">Programs</a></li>
+    <li><a href="elajj-schedule.html" class="active">Schedule</a></li>
+    <li><a href="elajj-instructors.html">Instructors</a></li>
+    <li><a href="elajj-programs.html">Special Programs</a></li>
+    <li><a href="elajj.html#location">Location</a></li>
+    <li><a href="elajj-trial.html" class="nav-cta">Free Trial</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="elajj.html#programs">Programs</a>
+  <a href="elajj-schedule.html">Schedule</a>
+  <a href="elajj-instructors.html">Instructors</a>
+  <a href="elajj-programs.html">Special Programs</a>
+  <a href="elajj.html#location">Location</a>
+  <a href="elajj-trial.html">Free Trial</a>
+</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="section-label">Weekly Classes</p>
+    <h1>CLASS<br><em>SCHEDULE.</em></h1>
+    <p>East LA Jiu Jitsu &middot; 3660 1st Street, Los Angeles, CA 90063 &middot; Kids and adult classes six days a week. Tap a program below to filter the week.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-label">Filter</span>
+    <button class="fbtn all-btn on" data-cat="all">All Classes</button>
+    <button class="fbtn" data-cat="peewees"><span class="dot" style="background:var(--c-peewees)"></span>Pee Wees &middot; 5&ndash;7</button>
+    <button class="fbtn" data-cat="kids"><span class="dot" style="background:var(--c-kids)"></span>Kids &middot; 8&ndash;12</button>
+    <button class="fbtn" data-cat="teens"><span class="dot" style="background:var(--c-teens)"></span>Teens &middot; 13&ndash;17</button>
+    <button class="fbtn" data-cat="adult"><span class="dot" style="background:var(--c-adult)"></span>Adult &amp; Teens</button>
+  </div>
+  <p class="filter-count" id="filterCount"></p>
+
+  <div class="grid-scroll">
+    <div class="week-grid" id="weekGrid"></div>
+  </div>
+  <div id="emptyState"></div>
+  <p class="scroll-hint-note">Swipe the grid sideways to see the full week</p>
+
+  <p class="schedule-note">* All kids classes subject to discretion of the instructor &mdash; safety is our number one priority. Schedule subject to change; follow @east_la_jiujitsu on Instagram for updates.</p>
+
+</div>
+
+<div class="trial-band">
+  <div><h2>Ready to jump in? First class free.</h2><p>Pick any class that fits your schedule &mdash; no gear required for your first visit.</p></div>
+  <a href="elajj-trial.html" class="btn-trial">Book Your Free Trial</a>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <span>&copy; 2026 East LA Jiu Jitsu &middot; A program of the Ethos Jiu Jitsu Foundation</span>
+    <span>3660 1st Street, Los Angeles, CA 90063 &middot; (833) 725-3615</span>
+  </div>
+</footer>
+
+<script>
+  var DAYS_SHORT = ['Mon','Tue','Wed','Thu','Fri','Sat'];
+  var TIMES = ['6:30 AM','10:30 AM','11:30 AM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
+
+  var CLASSES = [
+    { time:'6:30 AM',  day:0, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'6:30 AM',  day:2, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'6:30 AM',  day:4, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'10:30 AM', day:5, cat:'adult',   name:'Adult & Teens', note:'Open Mat',     attire:'open' },
+    { time:'11:30 AM', day:1, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'11:30 AM', day:3, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'4:00 PM',  day:0, cat:'kids',    name:'Kids',          note:'Ages 8-12',    attire:'gi' },
+    { time:'4:00 PM',  day:1, cat:'kids',    name:'Kids',          note:'Ages 8-12',    attire:'nogi' },
+    { time:'4:00 PM',  day:2, cat:'kids',    name:'Kids',          note:'Ages 8-12',    attire:'gi' },
+    { time:'4:00 PM',  day:3, cat:'kids',    name:'Kids',          note:'Ages 8-12',    attire:'gi' },
+    { time:'4:00 PM',  day:4, cat:'kids',    name:'Kids',          note:'Ages 8-12',    attire:'gi' },
+    { time:'5:00 PM',  day:0, cat:'peewees', name:'Pee Wees',      note:'Ages 5-7',     attire:'gi' },
+    { time:'5:00 PM',  day:1, cat:'teens',   name:'Teens',         note:'Ages 13-17',   attire:'nogi' },
+    { time:'5:00 PM',  day:2, cat:'peewees', name:'Pee Wees',      note:'Ages 5-7',     attire:'gi' },
+    { time:'5:00 PM',  day:3, cat:'teens',   name:'Teens',         note:'Ages 13-17',   attire:'gi' },
+    { time:'5:00 PM',  day:4, cat:'peewees', name:'Pee Wees',      note:'Ages 5-7',     attire:'gi' },
+    { time:'6:00 PM',  day:0, cat:'adult',   name:'Adult & Teens', note:'Fundamentals', attire:'gi' },
+    { time:'6:00 PM',  day:1, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'nogi' },
+    { time:'6:00 PM',  day:2, cat:'adult',   name:'Adult & Teens', note:'Fundamentals', attire:'gi' },
+    { time:'6:00 PM',  day:3, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'6:00 PM',  day:4, cat:'adult',   name:'Adult & Teens', note:'Fundamentals', attire:'gi' },
+    { time:'7:00 PM',  day:0, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'7:00 PM',  day:2, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' },
+    { time:'7:00 PM',  day:4, cat:'adult',   name:'Adult & Teens', note:'All Levels',   attire:'gi' }
+  ];
+
+  // Only render day columns that actually have classes
+  var DAYS_ACTIVE = [];
+  for (var dd = 0; dd < 6; dd++) {
+    if (CLASSES.some(function(c) { return c.day === dd; })) { DAYS_ACTIVE.push(dd); }
+  }
+
+  var ATTIRE_LABEL = { gi:'Gi', nogi:'No-Gi', open:'Open Mat' };
+  var ATTIRE_CLASS = { gi:'tag-gi', nogi:'tag-nogi', open:'tag-open' };
+
+  var active = [];
+  var grid = document.getElementById('weekGrid');
+  var emptyState = document.getElementById('emptyState');
+  var countEl = document.getElementById('filterCount');
+
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function visible(c) { return active.length === 0 || active.indexOf(c.cat) !== -1; }
+
+  function render() {
+    var shown = CLASSES.filter(visible);
+    var rows = TIMES.filter(function(t) {
+      return shown.some(function(c) { return c.time === t; });
+    });
+
+    if (rows.length === 0) {
+      grid.innerHTML = '';
+      grid.style.display = 'none';
+      emptyState.innerHTML = '<div class="empty-state"><p>No classes match that filter.</p></div>';
+      countEl.textContent = '';
+      return;
+    }
+
+    grid.style.display = 'grid';
+    emptyState.innerHTML = '';
+
+    grid.style.gridTemplateColumns = '84px repeat(' + DAYS_ACTIVE.length + ', minmax(140px, 1fr))';
+    grid.style.minWidth = (84 + DAYS_ACTIVE.length * 140) + 'px';
+
+    var html = '<div class="gcell ghead"></div>';
+    DAYS_ACTIVE.forEach(function(d) {
+      html += '<div class="gcell ghead">' + DAYS_SHORT[d] + '</div>';
+    });
+
+    rows.forEach(function(t) {
+      html += '<div class="gcell gtime">' + t.replace(' ', '<br>') + '</div>';
+      DAYS_ACTIVE.forEach(function(d) {
+        html += '<div class="gcell">';
+        shown.filter(function(c) { return c.time === t && c.day === d; }).forEach(function(c) {
+          html += '<span class="cls cat-' + c.cat + '">' +
+                    '<span class="cls-name">' + esc(c.name) + '</span>' +
+                    '<span class="cls-meta">' + esc(c.note) + '</span>' +
+                    '<span class="cls-tag ' + ATTIRE_CLASS[c.attire] + '">' + ATTIRE_LABEL[c.attire] + '</span>' +
+                  '</span>';
+        });
+        html += '</div>';
+      });
+    });
+
+    grid.innerHTML = html;
+    countEl.textContent = active.length === 0
+      ? 'Showing all ' + CLASSES.length + ' weekly classes.'
+      : 'Showing ' + shown.length + ' of ' + CLASSES.length + ' weekly classes.';
+  }
+
+  function syncButtons() {
+    var btns = document.querySelectorAll('.fbtn');
+    for (var i = 0; i < btns.length; i++) {
+      var cat = btns[i].getAttribute('data-cat');
+      if (cat === 'all') {
+        btns[i].classList.toggle('on', active.length === 0);
+      } else {
+        btns[i].classList.toggle('on', active.indexOf(cat) !== -1);
+      }
+    }
+  }
+
+  document.getElementById('filterBar').addEventListener('click', function(e) {
+    var btn = e.target.closest('.fbtn');
+    if (!btn) return;
+    var cat = btn.getAttribute('data-cat');
+    if (cat === 'all') {
+      active = [];
+    } else {
+      var i = active.indexOf(cat);
+      if (i === -1) { active.push(cat); } else { active.splice(i, 1); }
+    }
+    syncButtons();
+    render();
+  });
+
+  render();
+  syncButtons();
+
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', function() { mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
+  document.getElementById('mobileClose').addEventListener('click', closeMenu);
+  var mlinks = mobileMenu.querySelectorAll('a');
+  for (var j = 0; j < mlinks.length; j++) { mlinks[j].addEventListener('click', closeMenu); }
+</script>
+</body>
+</html>
